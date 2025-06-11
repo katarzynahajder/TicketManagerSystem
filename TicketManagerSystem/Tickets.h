@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Session.h"
+#include "TicketItem.h"
+
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -15,6 +18,7 @@ namespace TicketManagerSystem {
 		Tickets(void)
 		{
 			InitializeComponent();
+			this->LoadTickets();
 		}
 
 	protected:
@@ -25,42 +29,56 @@ namespace TicketManagerSystem {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
-	protected:
-
-	private:
-		System::ComponentModel::Container ^components;
+	private: System::Windows::Forms::Button^ userBtn;
+	private: System::Windows::Forms::FlowLayoutPanel^ ticketListPanel;
+	private: System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Tickets::typeid));
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->userBtn = (gcnew System::Windows::Forms::Button());
+			this->ticketListPanel = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->SuspendLayout();
 			// 
-			// pictureBox1
+			// userBtn
 			// 
-			this->pictureBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(1392, 39);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(112, 112);
-			this->pictureBox1->TabIndex = 0;
-			this->pictureBox1->TabStop = false;
+			this->userBtn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->userBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->userBtn->Location = System::Drawing::Point(1352, 18);
+			this->userBtn->Name = L"userBtn";
+			this->userBtn->Size = System::Drawing::Size(192, 107);
+			this->userBtn->TabIndex = 0;
+			this->userBtn->Text = L"username";
+			this->userBtn->UseVisualStyleBackColor = true;
+			this->userBtn->Click += gcnew System::EventHandler(this, &Tickets::userBtn_Click);
+			// 
+			// ticketListPanel
+			// 
+			this->ticketListPanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->ticketListPanel->AutoScroll = true;
+			this->ticketListPanel->BackColor = System::Drawing::Color::White;
+			this->ticketListPanel->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
+			this->ticketListPanel->Location = System::Drawing::Point(0, 150);
+			this->ticketListPanel->Name = L"ticketListPanel";
+			this->ticketListPanel->Size = System::Drawing::Size(1560, 759);
+			this->ticketListPanel->TabIndex = 0;
+			this->ticketListPanel->WrapContents = false;
 			// 
 			// Tickets
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->ticketListPanel);
+			this->Controls->Add(this->userBtn);
 			this->Name = L"Tickets";
 			this->Size = System::Drawing::Size(1560, 910);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-
+	private: System::Void userBtn_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void LoadTickets();
 	};
 }

@@ -75,7 +75,7 @@ namespace TicketManagerSystem {
 			this->usernameLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->usernameLabel->AutoSize = true;
 			this->usernameLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->usernameLabel->Location = System::Drawing::Point(569, 229);
+			this->usernameLabel->Location = System::Drawing::Point(560, 231);
 			this->usernameLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->usernameLabel->Name = L"usernameLabel";
 			this->usernameLabel->Size = System::Drawing::Size(270, 32);
@@ -87,7 +87,7 @@ namespace TicketManagerSystem {
 			this->emailLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->emailLabel->AutoSize = true;
 			this->emailLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->emailLabel->Location = System::Drawing::Point(569, 329);
+			this->emailLabel->Location = System::Drawing::Point(560, 331);
 			this->emailLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->emailLabel->Name = L"emailLabel";
 			this->emailLabel->Size = System::Drawing::Size(181, 32);
@@ -99,7 +99,7 @@ namespace TicketManagerSystem {
 			this->passwordLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->passwordLabel->AutoSize = true;
 			this->passwordLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->passwordLabel->Location = System::Drawing::Point(569, 428);
+			this->passwordLabel->Location = System::Drawing::Point(560, 428);
 			this->passwordLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->passwordLabel->Name = L"passwordLabel";
 			this->passwordLabel->Size = System::Drawing::Size(95, 32);
@@ -111,7 +111,7 @@ namespace TicketManagerSystem {
 			this->passwordConfirmLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->passwordConfirmLabel->AutoSize = true;
 			this->passwordConfirmLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->passwordConfirmLabel->Location = System::Drawing::Point(569, 534);
+			this->passwordConfirmLabel->Location = System::Drawing::Point(560, 534);
 			this->passwordConfirmLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->passwordConfirmLabel->Name = L"passwordConfirmLabel";
 			this->passwordConfirmLabel->Size = System::Drawing::Size(223, 32);

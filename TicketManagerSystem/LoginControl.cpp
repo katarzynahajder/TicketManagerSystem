@@ -3,6 +3,7 @@
 #include "LoginControl.h"
 #include "RegisterControl.h"
 #include "Tickets.h"
+#include "Session.h"
 
 #pragma unmanaged
 #include "../NativeDatabase/Database.h"
@@ -34,6 +35,7 @@ void LoginControl::loginBtn_Click(System::Object^ sender, System::EventArgs^ e) 
 
     if (success) {
         MessageBox::Show("Zalogowano pomyœlnie!", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        Session::Username = username;
         MainForm^ main = safe_cast<MainForm^>(this->FindForm());
         if (main != nullptr) {
             main->loadControl(gcnew Tickets());

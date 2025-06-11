@@ -55,7 +55,7 @@ namespace TicketManagerSystem {
 			   this->usernameLabel->AutoSize = true;
 			   this->usernameLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(238)));
-			   this->usernameLabel->Location = System::Drawing::Point(569, 229);
+			   this->usernameLabel->Location = System::Drawing::Point(560, 231);
 			   this->usernameLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			   this->usernameLabel->Name = L"usernameLabel";
 			   this->usernameLabel->Size = System::Drawing::Size(270, 32);
@@ -68,7 +68,7 @@ namespace TicketManagerSystem {
 			   this->passwordLabel->AutoSize = true;
 			   this->passwordLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(238)));
-			   this->passwordLabel->Location = System::Drawing::Point(569, 329);
+			   this->passwordLabel->Location = System::Drawing::Point(560, 331);
 			   this->passwordLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			   this->passwordLabel->Name = L"passwordLabel";
 			   this->passwordLabel->Size = System::Drawing::Size(95, 32);

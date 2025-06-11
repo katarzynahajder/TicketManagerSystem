@@ -3,6 +3,7 @@
 #include "LoginControl.h"
 #include "RegisterControl.h"
 #include "Tickets.h"
+#include "Session.h"
 
 #pragma unmanaged
 #include "../NativeDatabase/Database.h"
@@ -46,6 +47,7 @@ void RegisterControl::registerBtn_Click(System::Object^ sender, System::EventArg
 
     if (success) {
         MessageBox::Show("Konto zosta³o utworzone!", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        Session::Username = username;
         MainForm^ main = safe_cast<MainForm^>(this->FindForm());
         if (main != nullptr) {
             main->loadControl(gcnew Tickets());
