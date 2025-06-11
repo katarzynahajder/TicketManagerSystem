@@ -49,13 +49,14 @@ namespace TicketManagerSystem {
 			this->userBtn->Name = L"userBtn";
 			this->userBtn->Size = System::Drawing::Size(192, 107);
 			this->userBtn->TabIndex = 0;
-			this->userBtn->Text = L"username";
+			this->userBtn->Text = Session::Username;
 			this->userBtn->UseVisualStyleBackColor = true;
 			this->userBtn->Click += gcnew System::EventHandler(this, &Tickets::userBtn_Click);
 			// 
 			// ticketListPanel
 			// 
-			this->ticketListPanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->ticketListPanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->ticketListPanel->AutoScroll = true;
 			this->ticketListPanel->BackColor = System::Drawing::Color::White;
