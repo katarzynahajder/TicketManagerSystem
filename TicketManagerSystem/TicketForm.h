@@ -66,23 +66,21 @@ namespace TicketManagerSystem {
 			this->titleLabel->AutoSize = true;
 			this->titleLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->titleLabel->Location = System::Drawing::Point(400, 95);
-			this->titleLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->titleLabel->Location = System::Drawing::Point(245, 38);
 			this->titleLabel->Name = L"titleLabel";
-			this->titleLabel->Size = System::Drawing::Size(692, 64);
+			this->titleLabel->Size = System::Drawing::Size(354, 37);
 			this->titleLabel->TabIndex = 13;
-			this->titleLabel->Text = L"Dodaj bilet na wydarzenie";
+			this->titleLabel->Text = L"Tworzenie wydarzenia";
 			// 
 			// addBtn
 			// 
 			this->addBtn->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->addBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->addBtn->Location = System::Drawing::Point(246, 619);
-			this->addBtn->Margin = System::Windows::Forms::Padding(6);
+			this->addBtn->Location = System::Drawing::Point(134, 335);
 			this->addBtn->Name = L"addBtn";
-			this->addBtn->Size = System::Drawing::Size(300, 92);
+			this->addBtn->Size = System::Drawing::Size(164, 50);
 			this->addBtn->TabIndex = 22;
-			this->addBtn->Text = L"Dodaj bilet";
+			this->addBtn->Text = L"Stwórz";
 			this->addBtn->UseVisualStyleBackColor = true;
 			this->addBtn->Click += gcnew System::EventHandler(this, &TicketForm::addBtn_Click);
 			// 
@@ -91,10 +89,9 @@ namespace TicketManagerSystem {
 			this->dateLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->dateLabel->AutoSize = true;
 			this->dateLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->dateLabel->Location = System::Drawing::Point(797, 225);
-			this->dateLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->dateLabel->Location = System::Drawing::Point(435, 122);
 			this->dateLabel->Name = L"dateLabel";
-			this->dateLabel->Size = System::Drawing::Size(189, 32);
+			this->dateLabel->Size = System::Drawing::Size(105, 20);
 			this->dateLabel->TabIndex = 16;
 			this->dateLabel->Text = L"Odbêdzie siê:";
 			// 
@@ -103,10 +100,9 @@ namespace TicketManagerSystem {
 			this->usernameBox->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->usernameBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->usernameBox->Location = System::Drawing::Point(246, 263);
-			this->usernameBox->Margin = System::Windows::Forms::Padding(6);
+			this->usernameBox->Location = System::Drawing::Point(134, 142);
 			this->usernameBox->Name = L"usernameBox";
-			this->usernameBox->Size = System::Drawing::Size(500, 39);
+			this->usernameBox->Size = System::Drawing::Size(275, 26);
 			this->usernameBox->TabIndex = 18;
 			// 
 			// nameLabel
@@ -114,10 +110,9 @@ namespace TicketManagerSystem {
 			this->nameLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->nameLabel->AutoSize = true;
 			this->nameLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->nameLabel->Location = System::Drawing::Point(240, 225);
-			this->nameLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->nameLabel->Location = System::Drawing::Point(131, 122);
 			this->nameLabel->Name = L"nameLabel";
-			this->nameLabel->Size = System::Drawing::Size(259, 32);
+			this->nameLabel->Size = System::Drawing::Size(144, 20);
 			this->nameLabel->TabIndex = 14;
 			this->nameLabel->Text = L"Nazwa wydarzenia:";
 			// 
@@ -126,10 +121,9 @@ namespace TicketManagerSystem {
 			this->emailLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->emailLabel->AutoSize = true;
 			this->emailLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->emailLabel->Location = System::Drawing::Point(240, 330);
-			this->emailLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->emailLabel->Location = System::Drawing::Point(131, 179);
 			this->emailLabel->Name = L"emailLabel";
-			this->emailLabel->Size = System::Drawing::Size(81, 32);
+			this->emailLabel->Size = System::Drawing::Size(45, 20);
 			this->emailLabel->TabIndex = 15;
 			this->emailLabel->Text = L"Opis:";
 			// 
@@ -139,12 +133,11 @@ namespace TicketManagerSystem {
 			this->descriptionBox->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->descriptionBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->descriptionBox->Location = System::Drawing::Point(246, 368);
-			this->descriptionBox->Margin = System::Windows::Forms::Padding(6);
+			this->descriptionBox->Location = System::Drawing::Point(134, 199);
 			this->descriptionBox->Multiline = true;
 			this->descriptionBox->Name = L"descriptionBox";
 			this->descriptionBox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->descriptionBox->Size = System::Drawing::Size(500, 200);
+			this->descriptionBox->Size = System::Drawing::Size(275, 110);
 			this->descriptionBox->TabIndex = 23;
 			// 
 			// numLabel
@@ -152,10 +145,9 @@ namespace TicketManagerSystem {
 			this->numLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->numLabel->AutoSize = true;
 			this->numLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->numLabel->Location = System::Drawing::Point(797, 431);
-			this->numLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->numLabel->Location = System::Drawing::Point(435, 233);
 			this->numLabel->Name = L"numLabel";
-			this->numLabel->Size = System::Drawing::Size(169, 32);
+			this->numLabel->Size = System::Drawing::Size(95, 20);
 			this->numLabel->TabIndex = 25;
 			this->numLabel->Text = L"Iloœæ biletów";
 			// 
@@ -164,9 +156,10 @@ namespace TicketManagerSystem {
 			this->numericUpDown->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->numericUpDown->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->numericUpDown->Location = System::Drawing::Point(803, 466);
+			this->numericUpDown->Location = System::Drawing::Point(438, 252);
+			this->numericUpDown->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->numericUpDown->Name = L"numericUpDown";
-			this->numericUpDown->Size = System::Drawing::Size(163, 34);
+			this->numericUpDown->Size = System::Drawing::Size(89, 23);
 			this->numericUpDown->TabIndex = 26;
 			this->numericUpDown->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			// 
@@ -175,10 +168,9 @@ namespace TicketManagerSystem {
 			this->categorylabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->categorylabel->AutoSize = true;
 			this->categorylabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->categorylabel->Location = System::Drawing::Point(797, 330);
-			this->categorylabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->categorylabel->Location = System::Drawing::Point(435, 179);
 			this->categorylabel->Name = L"categorylabel";
-			this->categorylabel->Size = System::Drawing::Size(296, 32);
+			this->categorylabel->Size = System::Drawing::Size(164, 20);
 			this->categorylabel->TabIndex = 27;
 			this->categorylabel->Text = L"Kategoria wydarzenia:";
 			// 
@@ -189,9 +181,10 @@ namespace TicketManagerSystem {
 				static_cast<System::Byte>(238)));
 			this->comboBox->FormattingEnabled = true;
 			this->comboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"koncert", L"film", L"mecz" });
-			this->comboBox->Location = System::Drawing::Point(803, 365);
+			this->comboBox->Location = System::Drawing::Point(438, 198);
+			this->comboBox->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->comboBox->Name = L"comboBox";
-			this->comboBox->Size = System::Drawing::Size(339, 37);
+			this->comboBox->Size = System::Drawing::Size(187, 24);
 			this->comboBox->TabIndex = 28;
 			// 
 			// dateTimePicker
@@ -199,9 +192,10 @@ namespace TicketManagerSystem {
 			this->dateTimePicker->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->dateTimePicker->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->dateTimePicker->Location = System::Drawing::Point(803, 260);
+			this->dateTimePicker->Location = System::Drawing::Point(438, 141);
+			this->dateTimePicker->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->dateTimePicker->Name = L"dateTimePicker";
-			this->dateTimePicker->Size = System::Drawing::Size(500, 34);
+			this->dateTimePicker->Size = System::Drawing::Size(275, 23);
 			this->dateTimePicker->TabIndex = 29;
 			this->dateTimePicker->Value = System::DateTime(2025, 6, 28, 0, 0, 0, 0);
 			// 
@@ -209,10 +203,9 @@ namespace TicketManagerSystem {
 			// 
 			this->cancelBtn->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->cancelBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->cancelBtn->Location = System::Drawing::Point(558, 619);
-			this->cancelBtn->Margin = System::Windows::Forms::Padding(6);
+			this->cancelBtn->Location = System::Drawing::Point(304, 335);
 			this->cancelBtn->Name = L"cancelBtn";
-			this->cancelBtn->Size = System::Drawing::Size(300, 92);
+			this->cancelBtn->Size = System::Drawing::Size(164, 50);
 			this->cancelBtn->TabIndex = 30;
 			this->cancelBtn->Text = L"Anuluj";
 			this->cancelBtn->UseVisualStyleBackColor = true;
@@ -220,7 +213,7 @@ namespace TicketManagerSystem {
 			// 
 			// TicketForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->Controls->Add(this->cancelBtn);
 			this->Controls->Add(this->dateTimePicker);
@@ -235,8 +228,9 @@ namespace TicketManagerSystem {
 			this->Controls->Add(this->usernameBox);
 			this->Controls->Add(this->nameLabel);
 			this->Controls->Add(this->emailLabel);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"TicketForm";
-			this->Size = System::Drawing::Size(1560, 910);
+			this->Size = System::Drawing::Size(851, 493);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
