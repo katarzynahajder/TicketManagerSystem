@@ -1,9 +1,11 @@
 ﻿#include "Database.h"
 #include "sqlite3.h"
+#include <vector>
+#include <string>
 
 bool registerUser(const std::string& username, const std::string& email, const std::string& password) {
     sqlite3* db;
-    if (sqlite3_open("ticketmanager.db", &db) != SQLITE_OK) {
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
         return false;
     }
 
@@ -43,7 +45,7 @@ bool registerUser(const std::string& username, const std::string& email, const s
 
 bool userExists(const std::string& username) {
     sqlite3* db;
-    if (sqlite3_open("ticketmanager.db", &db) != SQLITE_OK)
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK)
         return false;
 
     const char* sql = "SELECT COUNT(*) FROM users WHERE username = ?;";
@@ -66,7 +68,7 @@ bool userExists(const std::string& username) {
 
 bool loginUser(const std::string& username, const std::string& password) {
     sqlite3* db;
-    if (sqlite3_open("ticketmanager.db", &db) != SQLITE_OK)
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK)
         return false;
 
     const char* sql = "SELECT password FROM users WHERE username = ?;";
@@ -89,4 +91,151 @@ bool loginUser(const std::string& username, const std::string& password) {
 
     sqlite3_close(db);
     return authenticated;
+}
+
+bool insertTicket(const std::string& title, const std::string& desc, const std::string& date, int count, const std::string& category) {
+    sqlite3* db;
+    sqlite3_open("tms.db", &db);
+
+    const char* createTicketsSQL =
+        "CREATE TABLE IF NOT EXISTS tickets ("
+        "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "title TEXT NOT NULL,"
+        "description TEXT,"
+        "date TEXT NOT NULL,"
+        "count INTEGER NOT NULL,"
+        "category TEXT"
+        ");";
+
+    char* errMsg = nullptr;
+    if (sqlite3_exec(db, createTicketsSQL, nullptr, nullptr, &errMsg) != SQLITE_OK) {
+        sqlite3_free(errMsg);
+        sqlite3_close(db);
+        return false;
+    }
+
+    sqlite3_stmt* stmt;
+    const char* sql = "INSERT INTO tickets (title, description, date, count, category) VALUES (?, ?, ?, ?, ?)";
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return false;
+    }
+
+    sqlite3_bind_text(stmt, 1, title.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, desc.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 3, date.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 4, count);
+    sqlite3_bind_text(stmt, 5, category.c_str(), -1, SQLITE_TRANSIENT);
+
+    bool success = sqlite3_step(stmt) == SQLITE_DONE;
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return success;
+}
+
+std::vector<Ticket> loadTickets() {
+    std::vector<Ticket> tickets;
+    sqlite3* db;
+    sqlite3_open("tms.db", &db);
+
+    const char* sql = "SELECT id, title, description, date, count, category FROM tickets";
+    sqlite3_stmt* stmt;
+    sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        Ticket t;
+        t.id = sqlite3_column_int(stmt, 0);
+        t.title = (const char*)sqlite3_column_text(stmt, 1);
+        t.description = (const char*)sqlite3_column_text(stmt, 2);
+        t.date = (const char*)sqlite3_column_text(stmt, 3);
+        t.count = sqlite3_column_int(stmt, 4);
+        t.category = (const char*)sqlite3_column_text(stmt, 5);
+        tickets.push_back(t);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return tickets;
+}
+
+bool insertReservation(const std::string& username, int ticketId) {
+    sqlite3* db;
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK)
+        return false;
+
+    const char* createReservationsTableSQL =
+        "CREATE TABLE IF NOT EXISTS reservations ("
+        "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+        "username TEXT NOT NULL, "
+        "ticket_id INTEGER NOT NULL);";
+
+    char* errMsg = nullptr;
+    if (sqlite3_exec(db, createReservationsTableSQL, nullptr, nullptr, &errMsg) != SQLITE_OK) {
+        sqlite3_free(errMsg);
+        sqlite3_close(db);
+        return false;
+    }
+
+    const char* sql = "INSERT INTO reservations (username, ticket_id) VALUES (?, ?);";
+    sqlite3_stmt* stmt;
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return false;
+    }
+
+    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 2, ticketId);
+
+    bool success = (sqlite3_step(stmt) == SQLITE_DONE);
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return success;
+}
+
+bool decrementTicketCount(int ticketId) {
+    sqlite3* db;
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK) return false;
+
+    const char* sql = "UPDATE tickets SET count = count - 1 WHERE id = ? AND count > 0;";
+    sqlite3_stmt* stmt;
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return false;
+    }
+
+    sqlite3_bind_int(stmt, 1, ticketId);
+
+    bool success = sqlite3_step(stmt) == SQLITE_DONE;
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return success;
+}
+
+bool hasUserReserved(const std::string& username, int ticketId) {
+    sqlite3* db;
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK) return false;
+
+    const char* sql = "SELECT COUNT(*) FROM reservations WHERE username = ? AND ticket_id = ?";
+    sqlite3_stmt* stmt;
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return false;
+    }
+
+    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 2, ticketId);
+
+    bool reserved = false;
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        reserved = sqlite3_column_int(stmt, 0) > 0;
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return reserved;
 }

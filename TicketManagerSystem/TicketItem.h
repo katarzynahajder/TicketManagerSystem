@@ -8,7 +8,7 @@ namespace TicketManagerSystem {
 
 	public ref class TicketItem : public UserControl {
 	public:
-		TicketItem(String^ title, String^ description, DateTime date, int count, String^ category);
+		TicketItem(int id, String^ title, String^ description, DateTime date, int count, String^ category);
 
 	private:
 		Label^ titleLabel;
@@ -16,5 +16,9 @@ namespace TicketManagerSystem {
 		Label^ descriptionLabel;
 		Label^ countLabel;
 		Label^ categoryLabel;
+		Button^ reserveBtn;
+		int ticketId;
+
+	private: System::Void reserveBtn_Click(System::Object^ sender, System::EventArgs^ e);
 	};
 }

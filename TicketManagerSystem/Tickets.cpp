@@ -2,6 +2,10 @@
 #include "MainForm.h"
 #include "UserProfile.h"
 
+#pragma unmanaged
+#include "../NativeDatabase/Database.h"
+#pragma managed
+
 using namespace TicketManagerSystem;
 
 Void Tickets::userBtn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -14,14 +18,15 @@ Void Tickets::userBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 void Tickets::LoadTickets() {
     this->ticketListPanel->Controls->Clear();
 
-    for (int i = 0; i < 5; i++) {
-        String^ title = "Wydarzenie #" + i.ToString();
-        String^ description = "Opis wydarzenia testowego numer " + i.ToString();
-        DateTime date = DateTime::Now.AddDays(i);
-        int count = 100 - i * 10;
-        String^ category = (i % 2 == 0) ? "film" : "koncert";
+	auto nativeTickets = loadTickets();
 
-        TicketItem^ item = gcnew TicketItem(title, description, date, count, category);
-        this->ticketListPanel->Controls->Add(item);
-    }
+	for (auto& t : nativeTickets) {
+		String^ title = gcnew String(t.title.c_str());
+		String^ description = gcnew String(t.description.c_str());
+		DateTime date = DateTime::Parse(gcnew String(t.date.c_str()));
+		String^ category = gcnew String(t.category.c_str());
+
+		TicketItem^ item = gcnew TicketItem(t.id, title, description, date, t.count, category);
+		ticketListPanel->Controls->Add(item);
+	}
 }
