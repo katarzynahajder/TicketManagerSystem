@@ -16,9 +16,9 @@ namespace TicketManagerSystem {
 
 	TicketItem::TicketItem(int id, String^ title, String^ description, DateTime date, int count, String^ category) {
 		this->ticketId = id;
-		this->Size = Drawing::Size(1138, 120);
+		this->Size = Drawing::Size(1155, 120);
 		this->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-		this->Margin = System::Windows::Forms::Padding(10);
+		this->Margin = System::Windows::Forms::Padding(10, 10, 0, 10);
 
 		titleLabel = gcnew Label();
 		titleLabel->Text = title;

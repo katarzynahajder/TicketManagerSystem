@@ -38,7 +38,8 @@ namespace TicketManagerSystem {
 	private: System::Windows::Forms::Label^ categorylabel;
 	private: System::Windows::Forms::ComboBox^ comboBox;
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker;
-	private: System::ComponentModel::Container ^components;
+	private: System::Windows::Forms::Button^ cancelBtn;
+	private: System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
@@ -55,6 +56,7 @@ namespace TicketManagerSystem {
 			this->categorylabel = (gcnew System::Windows::Forms::Label());
 			this->comboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->dateTimePicker = (gcnew System::Windows::Forms::DateTimePicker());
+			this->cancelBtn = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -203,10 +205,24 @@ namespace TicketManagerSystem {
 			this->dateTimePicker->TabIndex = 29;
 			this->dateTimePicker->Value = System::DateTime(2025, 6, 28, 0, 0, 0, 0);
 			// 
+			// cancelBtn
+			// 
+			this->cancelBtn->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->cancelBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
+			this->cancelBtn->Location = System::Drawing::Point(558, 619);
+			this->cancelBtn->Margin = System::Windows::Forms::Padding(6);
+			this->cancelBtn->Name = L"cancelBtn";
+			this->cancelBtn->Size = System::Drawing::Size(300, 92);
+			this->cancelBtn->TabIndex = 30;
+			this->cancelBtn->Text = L"Anuluj";
+			this->cancelBtn->UseVisualStyleBackColor = true;
+			this->cancelBtn->Click += gcnew System::EventHandler(this, &TicketForm::cancelBtn_Click);
+			// 
 			// TicketForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Controls->Add(this->cancelBtn);
 			this->Controls->Add(this->dateTimePicker);
 			this->Controls->Add(this->comboBox);
 			this->Controls->Add(this->categorylabel);
@@ -228,5 +244,6 @@ namespace TicketManagerSystem {
 		}
 #pragma endregion
 	private: System::Void addBtn_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void cancelBtn_Click(System::Object^ sender, System::EventArgs^ e);
 	};
 }

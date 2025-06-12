@@ -1,5 +1,7 @@
 #include <msclr/marshal_cppstd.h>
 #include "TicketForm.h"
+#include "UserProfile.h"
+#include "MainForm.h"
 
 #pragma unmanaged
 #include "../NativeDatabase/Database.h"
@@ -28,5 +30,18 @@ Void TicketForm::addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
     insertTicket(nativeTitle, nativeDesc, nativeDate, count, nativeCategory);
 
     MessageBox::Show("Wydarzenie dodane.");
+
+    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
+    if (main != nullptr) {
+        main->loadControl(gcnew UserProfile());
+    }
+
+}
+
+Void TicketForm::cancelBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
+    if (main != nullptr) {
+        main->loadControl(gcnew UserProfile());
+    }
 
 }

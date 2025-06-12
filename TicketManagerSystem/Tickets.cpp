@@ -1,6 +1,7 @@
 #include "Tickets.h"
 #include "MainForm.h"
 #include "UserProfile.h"
+#include "MainMenuControl.h"
 
 #pragma unmanaged
 #include "../NativeDatabase/Database.h"
@@ -28,5 +29,12 @@ void Tickets::LoadTickets() {
 
 		TicketItem^ item = gcnew TicketItem(t.id, title, description, date, t.count, category);
 		ticketListPanel->Controls->Add(item);
+	}
+}
+
+Void Tickets::logoutBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+	MainForm^ main = safe_cast<MainForm^>(this->FindForm());
+	if (main != nullptr) {
+		main->loadControl(gcnew MainMenuControl());
 	}
 }

@@ -239,3 +239,51 @@ bool hasUserReserved(const std::string& username, int ticketId) {
     sqlite3_close(db);
     return reserved;
 }
+
+std::vector<Reservation> loadReservations(const std::string& username) {
+    std::vector<Reservation> result;
+    sqlite3* db;
+    sqlite3_open("tms.db", &db);
+
+    const char* sql;
+
+    if (username == "admin") {
+        sql = R"(
+			SELECT r.username, t.title, t.description, t.date, t.category
+			FROM reservations r
+			JOIN tickets t ON r.ticket_id = t.id
+		)";
+    }
+    else {
+        sql = R"(
+			SELECT r.username, t.title, t.description, t.date, t.category
+			FROM reservations r
+			JOIN tickets t ON r.ticket_id = t.id
+			WHERE r.username = ?
+		)";
+    }
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return result;
+    }
+
+    if (username != "admin") {
+        sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+    }
+
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        Reservation r;
+        r.username = (const char*)sqlite3_column_text(stmt, 0);
+        r.title = (const char*)sqlite3_column_text(stmt, 1);
+        r.description = (const char*)sqlite3_column_text(stmt, 2);
+        r.date = (const char*)sqlite3_column_text(stmt, 3);
+        r.category = (const char*)sqlite3_column_text(stmt, 4);
+        result.push_back(r);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return result;
+}

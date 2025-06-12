@@ -46,11 +46,10 @@ void RegisterControl::registerBtn_Click(System::Object^ sender, System::EventArg
     bool success = registerUser(nativeUsername, nativeEmail, nativePassword);
 
     if (success) {
-        MessageBox::Show("Konto zosta³o utworzone!", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
-        Session::Username = username;
+        MessageBox::Show("Konto zosta³o utworzone! Mo¿esz siê zalogowaæ.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
         MainForm^ main = safe_cast<MainForm^>(this->FindForm());
         if (main != nullptr) {
-            main->loadControl(gcnew Tickets());
+            main->loadControl(gcnew LoginControl());
         }
     }
     else {

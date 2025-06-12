@@ -134,6 +134,8 @@
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MainMenuControl.cpp" />
     <ClCompile Include="RegisterControl.cpp" />
+    <ClCompile Include="ReservationItem.cpp" />
+    <ClCompile Include="Reservations.cpp" />
     <ClCompile Include="TicketForm.cpp" />
     <ClCompile Include="TicketItem.cpp" />
     <ClCompile Include="Tickets.cpp" />
@@ -151,6 +153,12 @@
     </ClInclude>
     <ClInclude Include="RegisterControl.h">
       <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ReservationItem.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
+    <ClInclude Include="Reservations.h">
+      <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="Session.h" />
     <ClInclude Include="TicketForm.h">
@@ -178,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterControl.resx">
       <DependentUpon>RegisterControl.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reservations.resx">
+      <DependentUpon>Reservations.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TicketForm.resx">
       <DependentUpon>TicketForm.h</DependentUpon>
