@@ -249,14 +249,14 @@ std::vector<Reservation> loadReservations(const std::string& username) {
 
     if (username == "admin") {
         sql = R"(
-			SELECT r.username, t.title, t.description, t.date, t.category
+			SELECT r.ticket_id, r.username, t.title, t.description, t.date, t.category
 			FROM reservations r
 			JOIN tickets t ON r.ticket_id = t.id
 		)";
     }
     else {
         sql = R"(
-			SELECT r.username, t.title, t.description, t.date, t.category
+			SELECT r.ticket_id, r.username, t.title, t.description, t.date, t.category
 			FROM reservations r
 			JOIN tickets t ON r.ticket_id = t.id
 			WHERE r.username = ?
@@ -275,11 +275,12 @@ std::vector<Reservation> loadReservations(const std::string& username) {
 
     while (sqlite3_step(stmt) == SQLITE_ROW) {
         Reservation r;
-        r.username = (const char*)sqlite3_column_text(stmt, 0);
-        r.title = (const char*)sqlite3_column_text(stmt, 1);
-        r.description = (const char*)sqlite3_column_text(stmt, 2);
-        r.date = (const char*)sqlite3_column_text(stmt, 3);
-        r.category = (const char*)sqlite3_column_text(stmt, 4);
+        r.ticketId = sqlite3_column_int(stmt, 0);
+        r.username = (const char*)sqlite3_column_text(stmt, 1);
+        r.title = (const char*)sqlite3_column_text(stmt, 2);
+        r.description = (const char*)sqlite3_column_text(stmt, 3);
+        r.date = (const char*)sqlite3_column_text(stmt, 4);
+        r.category = (const char*)sqlite3_column_text(stmt, 5);
         result.push_back(r);
     }
 
@@ -364,4 +365,42 @@ bool updateUserInfo(const std::string& oldUsername, const std::string& newUserna
     sqlite3_finalize(stmt);
     sqlite3_close(db);
     return success;
+}
+
+bool cancelUserTicket(const std::string& username, int ticketId) {
+    sqlite3* db;
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
+        return false;
+    }
+
+    const char* sqlRemoveTicket = "DELETE FROM reservations WHERE username = ? AND ticket_id = ?";
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(db, sqlRemoveTicket, -1, &stmt, nullptr) == SQLITE_OK) {
+        sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_int(stmt, 2, ticketId);
+
+        if (sqlite3_step(stmt) != SQLITE_DONE) {
+            sqlite3_finalize(stmt);
+            sqlite3_close(db);
+            return false;
+        }
+    }
+    sqlite3_finalize(stmt);
+
+    const char* sqlEventIncreaseCount = "UPDATE tickets SET count = count + 1 WHERE id = ?";
+
+    if (sqlite3_prepare_v2(db, sqlEventIncreaseCount, -1, &stmt, nullptr) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, ticketId);
+
+        if (sqlite3_step(stmt) != SQLITE_DONE) {
+            sqlite3_finalize(stmt);
+            sqlite3_close(db);
+            return false;
+        }
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return true;
 }

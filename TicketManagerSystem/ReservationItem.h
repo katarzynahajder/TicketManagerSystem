@@ -7,7 +7,7 @@ namespace TicketManagerSystem {
 
 	public ref class ReservationItem : public UserControl {
 	public:
-		ReservationItem(String^ username, String^ title, String^ description, DateTime date, String^ category);
+		ReservationItem(int ticketId, String^ username, String^ title, String^ description, DateTime date, String^ category);
 
 	private:
 		Label^ titleLabel;
@@ -15,5 +15,9 @@ namespace TicketManagerSystem {
 		Label^ descriptionLabel;
 		Label^ categoryLabel;
 		Label^ usernameLabel;
+		Button^ cancelBtn;
+		int ticketId;
+
+	private: Void cancelBtn_Click(Object^ sender, EventArgs^ e);
 	};
 }

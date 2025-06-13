@@ -13,6 +13,7 @@ struct Ticket {
 };
 
 struct Reservation {
+	int ticketId;
 	std::string username;
 	std::string title;
 	std::string description;
@@ -49,3 +50,5 @@ int getUserTicketCount(const std::string& username);
 std::vector<UserInfo> getUserInfo(const std::string& username);
 
 bool updateUserInfo(const std::string& oldUsername, const std::string& newUsername, const std::string& email, const std::string& password);
+
+bool cancelUserTicket(const std::string& username, int ticketId);
