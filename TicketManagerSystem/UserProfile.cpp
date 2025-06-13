@@ -53,7 +53,7 @@ Void UserProfile::UserProfile_Load(System::Object^ sender, System::EventArgs^ e)
 
     int amountOfTickets = getUserTicketCount(uname);
 
-    if (Session::Username == "admin") {
+    if (username == "admin") {
         ticketCountLabel->Text = "";
     }
     else if (amountOfTickets >= 0) {
