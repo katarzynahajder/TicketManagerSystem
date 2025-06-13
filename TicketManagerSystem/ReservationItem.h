@@ -17,6 +17,7 @@ namespace TicketManagerSystem {
 		Label^ usernameLabel;
 		Button^ cancelBtn;
 		int ticketId;
+		String^ username;
 
 	private: Void cancelBtn_Click(Object^ sender, EventArgs^ e);
 	};

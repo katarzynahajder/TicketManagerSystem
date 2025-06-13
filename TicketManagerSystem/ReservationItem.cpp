@@ -12,6 +12,7 @@ namespace TicketManagerSystem {
 
 	ReservationItem::ReservationItem(int ticketId, String^ username, String^ title, String^ description, DateTime date, String^ category) {
 		this->ticketId = ticketId;
+		this->username = username;
 		this->Size = Drawing::Size(1155, 120);
 		this->BackColor = System::Drawing::Color::WhiteSmoke;
 		this->Margin = System::Windows::Forms::Padding(10, 10, 0, 10);
@@ -63,7 +64,7 @@ namespace TicketManagerSystem {
 	}
 
 	Void ReservationItem::cancelBtn_Click(Object^ sender, EventArgs^ e) {
-		String^ username = Session::Username;
+		String^ username = this->username;
 
 		std::string uname = msclr::interop::marshal_as<std::string>(username);
 

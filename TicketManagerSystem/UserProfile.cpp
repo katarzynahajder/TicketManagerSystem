@@ -38,7 +38,6 @@ Void UserProfile::UserProfile_Load(System::Object^ sender, System::EventArgs^ e)
     String^ username = Session::Username;
 
     std::string uname = msclr::interop::marshal_as<std::string>(username);
-
     std::vector<UserInfo> info = getUserInfo(uname);
 
     if (!info.empty()) {
@@ -54,7 +53,10 @@ Void UserProfile::UserProfile_Load(System::Object^ sender, System::EventArgs^ e)
 
     int amountOfTickets = getUserTicketCount(uname);
 
-    if (amountOfTickets >= 0) {
+    if (Session::Username == "admin") {
+        ticketCountLabel->Text = "";
+    }
+    else if (amountOfTickets >= 0) {
        ticketCountLabel->Text = "Posiadane bilety: " + amountOfTickets.ToString();
     }
     else {

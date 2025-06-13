@@ -194,6 +194,9 @@
     <EmbeddedResource Include="RegisterControl.resx">
       <DependentUpon>RegisterControl.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReservationItem.resx">
+      <DependentUpon>ReservationItem.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reservations.resx">
       <DependentUpon>Reservations.h</DependentUpon>
     </EmbeddedResource>

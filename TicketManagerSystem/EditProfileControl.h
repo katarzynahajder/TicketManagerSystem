@@ -82,9 +82,10 @@ namespace TicketManagerSystem {
 			this->titleLabel->AutoSize = true;
 			this->titleLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->titleLabel->Location = System::Drawing::Point(290, 73);
+			this->titleLabel->Location = System::Drawing::Point(525, 95);
+			this->titleLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->titleLabel->Name = L"titleLabel";
-			this->titleLabel->Size = System::Drawing::Size(285, 37);
+			this->titleLabel->Size = System::Drawing::Size(484, 64);
 			this->titleLabel->TabIndex = 13;
 			this->titleLabel->Text = L"Edytowanie konta";
 			// 
@@ -93,10 +94,11 @@ namespace TicketManagerSystem {
 			this->passwordConfirmBox->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->passwordConfirmBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->passwordConfirmBox->Location = System::Drawing::Point(317, 325);
+			this->passwordConfirmBox->Location = System::Drawing::Point(566, 572);
+			this->passwordConfirmBox->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->passwordConfirmBox->Name = L"passwordConfirmBox";
 			this->passwordConfirmBox->PasswordChar = '*';
-			this->passwordConfirmBox->Size = System::Drawing::Size(220, 26);
+			this->passwordConfirmBox->Size = System::Drawing::Size(400, 39);
 			this->passwordConfirmBox->TabIndex = 21;
 			// 
 			// passwordConfirmLabel
@@ -104,9 +106,10 @@ namespace TicketManagerSystem {
 			this->passwordConfirmLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->passwordConfirmLabel->AutoSize = true;
 			this->passwordConfirmLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->passwordConfirmLabel->Location = System::Drawing::Point(313, 304);
+			this->passwordConfirmLabel->Location = System::Drawing::Point(560, 534);
+			this->passwordConfirmLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->passwordConfirmLabel->Name = L"passwordConfirmLabel";
-			this->passwordConfirmLabel->Size = System::Drawing::Size(125, 20);
+			this->passwordConfirmLabel->Size = System::Drawing::Size(223, 32);
 			this->passwordConfirmLabel->TabIndex = 17;
 			this->passwordConfirmLabel->Text = L"PotwierdŸ has³o:";
 			// 
@@ -115,19 +118,21 @@ namespace TicketManagerSystem {
 			this->passwordBox->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->passwordBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->passwordBox->Location = System::Drawing::Point(317, 267);
+			this->passwordBox->Location = System::Drawing::Point(566, 466);
+			this->passwordBox->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->passwordBox->Name = L"passwordBox";
 			this->passwordBox->PasswordChar = '*';
-			this->passwordBox->Size = System::Drawing::Size(220, 26);
+			this->passwordBox->Size = System::Drawing::Size(400, 39);
 			this->passwordBox->TabIndex = 20;
 			// 
 			// editBtn
 			// 
 			this->editBtn->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->editBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->editBtn->Location = System::Drawing::Point(450, 368);
+			this->editBtn->Location = System::Drawing::Point(790, 669);
+			this->editBtn->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->editBtn->Name = L"editBtn";
-			this->editBtn->Size = System::Drawing::Size(125, 50);
+			this->editBtn->Size = System::Drawing::Size(229, 92);
 			this->editBtn->TabIndex = 22;
 			this->editBtn->Text = L"Edytuj";
 			this->editBtn->UseVisualStyleBackColor = true;
@@ -138,9 +143,10 @@ namespace TicketManagerSystem {
 			this->emailBox->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->emailBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->emailBox->Location = System::Drawing::Point(317, 214);
+			this->emailBox->Location = System::Drawing::Point(566, 367);
+			this->emailBox->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->emailBox->Name = L"emailBox";
-			this->emailBox->Size = System::Drawing::Size(220, 26);
+			this->emailBox->Size = System::Drawing::Size(400, 39);
 			this->emailBox->TabIndex = 19;
 			// 
 			// passwordLabel
@@ -148,9 +154,10 @@ namespace TicketManagerSystem {
 			this->passwordLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->passwordLabel->AutoSize = true;
 			this->passwordLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->passwordLabel->Location = System::Drawing::Point(313, 247);
+			this->passwordLabel->Location = System::Drawing::Point(560, 428);
+			this->passwordLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->passwordLabel->Name = L"passwordLabel";
-			this->passwordLabel->Size = System::Drawing::Size(55, 20);
+			this->passwordLabel->Size = System::Drawing::Size(95, 32);
 			this->passwordLabel->TabIndex = 16;
 			this->passwordLabel->Text = L"Has³o:";
 			// 
@@ -159,9 +166,10 @@ namespace TicketManagerSystem {
 			this->usernameBox->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->usernameBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->usernameBox->Location = System::Drawing::Point(317, 160);
+			this->usernameBox->Location = System::Drawing::Point(566, 267);
+			this->usernameBox->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->usernameBox->Name = L"usernameBox";
-			this->usernameBox->Size = System::Drawing::Size(220, 26);
+			this->usernameBox->Size = System::Drawing::Size(400, 39);
 			this->usernameBox->TabIndex = 18;
 			// 
 			// usernameLabel
@@ -169,9 +177,10 @@ namespace TicketManagerSystem {
 			this->usernameLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->usernameLabel->AutoSize = true;
 			this->usernameLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->usernameLabel->Location = System::Drawing::Point(313, 140);
+			this->usernameLabel->Location = System::Drawing::Point(560, 231);
+			this->usernameLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->usernameLabel->Name = L"usernameLabel";
-			this->usernameLabel->Size = System::Drawing::Size(151, 20);
+			this->usernameLabel->Size = System::Drawing::Size(270, 32);
 			this->usernameLabel->TabIndex = 14;
 			this->usernameLabel->Text = L"Nazwa u¿ytkownika:";
 			// 
@@ -180,9 +189,10 @@ namespace TicketManagerSystem {
 			this->emailLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->emailLabel->AutoSize = true;
 			this->emailLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->emailLabel->Location = System::Drawing::Point(313, 194);
+			this->emailLabel->Location = System::Drawing::Point(560, 331);
+			this->emailLabel->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->emailLabel->Name = L"emailLabel";
-			this->emailLabel->Size = System::Drawing::Size(101, 20);
+			this->emailLabel->Size = System::Drawing::Size(181, 32);
 			this->emailLabel->TabIndex = 15;
 			this->emailLabel->Text = L"Adres e-mail:";
 			// 
@@ -190,9 +200,10 @@ namespace TicketManagerSystem {
 			// 
 			this->cancelBtn->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->cancelBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
-			this->cancelBtn->Location = System::Drawing::Point(289, 368);
+			this->cancelBtn->Location = System::Drawing::Point(512, 669);
+			this->cancelBtn->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->cancelBtn->Name = L"cancelBtn";
-			this->cancelBtn->Size = System::Drawing::Size(125, 50);
+			this->cancelBtn->Size = System::Drawing::Size(229, 92);
 			this->cancelBtn->TabIndex = 23;
 			this->cancelBtn->Text = L"Anuluj";
 			this->cancelBtn->UseVisualStyleBackColor = true;
@@ -200,7 +211,7 @@ namespace TicketManagerSystem {
 			// 
 			// EditProfileControl
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->Controls->Add(this->cancelBtn);
 			this->Controls->Add(this->titleLabel);
@@ -213,8 +224,9 @@ namespace TicketManagerSystem {
 			this->Controls->Add(this->usernameBox);
 			this->Controls->Add(this->usernameLabel);
 			this->Controls->Add(this->emailLabel);
+			this->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->Name = L"EditProfileControl";
-			this->Size = System::Drawing::Size(851, 493);
+			this->Size = System::Drawing::Size(1560, 910);
 			this->Load += gcnew System::EventHandler(this, &EditProfileControl::EditProfileControl_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
