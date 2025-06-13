@@ -48,9 +48,10 @@ namespace TicketManagerSystem {
 			this->userBtn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->userBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->userBtn->Location = System::Drawing::Point(1292, 20);
+			this->userBtn->Location = System::Drawing::Point(705, 11);
+			this->userBtn->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->userBtn->Name = L"userBtn";
-			this->userBtn->Size = System::Drawing::Size(244, 107);
+			this->userBtn->Size = System::Drawing::Size(133, 58);
 			this->userBtn->TabIndex = 0;
 			this->userBtn->Text = L"Moje konto";
 			this->userBtn->UseVisualStyleBackColor = true;
@@ -64,9 +65,10 @@ namespace TicketManagerSystem {
 			this->ticketListPanel->AutoScroll = true;
 			this->ticketListPanel->BackColor = System::Drawing::Color::White;
 			this->ticketListPanel->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
-			this->ticketListPanel->Location = System::Drawing::Point(0, 150);
+			this->ticketListPanel->Location = System::Drawing::Point(0, 81);
+			this->ticketListPanel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->ticketListPanel->Name = L"ticketListPanel";
-			this->ticketListPanel->Size = System::Drawing::Size(1560, 759);
+			this->ticketListPanel->Size = System::Drawing::Size(851, 411);
 			this->ticketListPanel->TabIndex = 0;
 			this->ticketListPanel->WrapContents = false;
 			// 
@@ -74,9 +76,10 @@ namespace TicketManagerSystem {
 			// 
 			this->logoutBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->logoutBtn->Location = System::Drawing::Point(20, 20);
+			this->logoutBtn->Location = System::Drawing::Point(11, 11);
+			this->logoutBtn->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->logoutBtn->Name = L"logoutBtn";
-			this->logoutBtn->Size = System::Drawing::Size(244, 107);
+			this->logoutBtn->Size = System::Drawing::Size(133, 58);
 			this->logoutBtn->TabIndex = 1;
 			this->logoutBtn->Text = L"Wyloguj siê";
 			this->logoutBtn->UseVisualStyleBackColor = true;
@@ -88,22 +91,24 @@ namespace TicketManagerSystem {
 			this->label->AutoSize = true;
 			this->label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->label->Location = System::Drawing::Point(672, 31);
+			this->label->Location = System::Drawing::Point(310, 17);
+			this->label->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label->Name = L"label";
-			this->label->Size = System::Drawing::Size(165, 64);
+			this->label->Size = System::Drawing::Size(186, 37);
 			this->label->TabIndex = 2;
-			this->label->Text = L"Bilety";
+			this->label->Text = L"Wydarzenia";
 			// 
 			// Tickets
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->Controls->Add(this->label);
 			this->Controls->Add(this->logoutBtn);
 			this->Controls->Add(this->ticketListPanel);
 			this->Controls->Add(this->userBtn);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"Tickets";
-			this->Size = System::Drawing::Size(1560, 910);
+			this->Size = System::Drawing::Size(851, 493);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

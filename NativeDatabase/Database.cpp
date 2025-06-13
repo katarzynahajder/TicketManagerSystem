@@ -287,3 +287,81 @@ std::vector<Reservation> loadReservations(const std::string& username) {
     sqlite3_close(db);
     return result;
 }
+
+int getUserTicketCount(const std::string& username) {
+    int ticketCount = -1;
+    sqlite3* db;
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK) return ticketCount;
+
+    const char* sql = "SELECT count() FROM reservations WHERE username = ?";
+    sqlite3_stmt* stmt;
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return ticketCount;
+    }
+
+    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        ticketCount = sqlite3_column_int(stmt, 0);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return ticketCount;
+}
+
+std::vector<UserInfo> getUserInfo(const std::string& username) {
+    std::vector<UserInfo> result;
+    sqlite3* db;
+    sqlite3_open("tms.db", &db);
+
+    const char* sql = "SELECT username, email, password FROM users WHERE username = ?";
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return result;
+    }
+
+    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        UserInfo u;
+        u.username = (const char*)sqlite3_column_text(stmt, 0);
+        u.email = (const char*)sqlite3_column_text(stmt, 1);
+        u.password = (const char*)sqlite3_column_text(stmt, 2);
+        result.push_back(u);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return result;
+}
+
+bool updateUserInfo(const std::string& oldUsername, const std::string& newUsername, const std::string& email, const std::string& password) {
+    sqlite3* db;
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
+        return false;
+    }
+
+    const char* sql = "UPDATE users SET username = ?, email = ?, password = ? WHERE username = ?";
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return false;
+    }
+
+    sqlite3_bind_text(stmt, 1, newUsername.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, email.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 3, password.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 4, oldUsername.c_str(), -1, SQLITE_STATIC);
+
+    bool success = sqlite3_step(stmt) == SQLITE_DONE;
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return success;
+}

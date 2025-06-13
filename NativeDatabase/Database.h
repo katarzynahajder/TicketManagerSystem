@@ -20,6 +20,12 @@ struct Reservation {
 	std::string category;
 };
 
+struct UserInfo {
+	std::string username;
+	std::string email;
+	std::string password;
+};
+
 bool registerUser(const std::string& username, const std::string& email, const std::string& password);
 
 bool userExists(const std::string& username);
@@ -37,3 +43,9 @@ bool decrementTicketCount(int ticketId);
 bool hasUserReserved(const std::string& username, int ticketId);
 
 std::vector<Reservation> loadReservations(const std::string& username);
+
+int getUserTicketCount(const std::string& username);
+
+std::vector<UserInfo> getUserInfo(const std::string& username);
+
+bool updateUserInfo(const std::string& oldUsername, const std::string& newUsername, const std::string& email, const std::string& password);
