@@ -33,8 +33,17 @@ void Tickets::LoadTickets() {
 }
 
 Void Tickets::logoutBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-	MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-	if (main != nullptr) {
-		main->loadControl(gcnew MainMenuControl());
+	System::Windows::Forms::DialogResult result = MessageBox::Show(
+		"Czy na pewno chcesz siê wylogowaæ?",
+		"Potwierdzenie wylogowania",
+		MessageBoxButtons::YesNo,
+		MessageBoxIcon::Question
+	);
+
+	if (result == System::Windows::Forms::DialogResult::Yes) {
+		MainForm^ main = safe_cast<MainForm^>(this->FindForm());
+		if (main != nullptr) {
+			main->loadControl(gcnew MainMenuControl());
+		}
 	}
 }
