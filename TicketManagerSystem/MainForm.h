@@ -38,8 +38,9 @@ namespace TicketManagerSystem {
 			// MainForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Inherit;
-			this->ClientSize = System::Drawing::Size(1155, 636);
-			this->MinimumSize = System::Drawing::Size(1155, 636);
+			this->ClientSize = System::Drawing::Size(1149, 661);
+			this->MaximumSize = System::Drawing::Size(1165, 700);
+			this->MinimumSize = System::Drawing::Size(1165, 700);
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->ResumeLayout(false);
