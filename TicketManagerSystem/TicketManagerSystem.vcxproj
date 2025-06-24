@@ -130,6 +130,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EditEventControl.cpp" />
     <ClCompile Include="EditProfileControl.cpp" />
     <ClCompile Include="LoginControl.cpp" />
     <ClCompile Include="MainForm.cpp" />
@@ -143,6 +144,9 @@
     <ClCompile Include="UserProfile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EditEventControl.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
     <ClInclude Include="EditProfileControl.h">
       <FileType>CppControl</FileType>
     </ClInclude>
@@ -179,6 +183,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EditEventControl.resx">
+      <DependentUpon>EditEventControl.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditProfileControl.resx">
       <DependentUpon>EditProfileControl.h</DependentUpon>
     </EmbeddedResource>

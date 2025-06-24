@@ -3,6 +3,7 @@
 #include "Session.h"
 #include "MainForm.h"
 #include "Tickets.h"
+#include "EditEventControl.h"
 
 #pragma unmanaged
 #include "../NativeDatabase/Database.h"
@@ -140,10 +141,27 @@ namespace TicketManagerSystem {
 		}
 	}
 	void TicketItem::editEventBtn_Click(Object^ sender, EventArgs^ e) {
-	
+		MainForm^ main = safe_cast<MainForm^>(this->FindForm());
+		if (main != nullptr) {
+			main->loadControl(gcnew EditEventControl(this->ticketId));
+		}
 	}
 
 	void TicketItem::removeEventBtn_Click(Object^ sender, EventArgs^ e) {
-	
+
+		if (removeEvent(this->ticketId)) {
+
+			String^ msg = "Usunięto wydarzenie: " + titleLabel->Text;
+
+			MessageBox::Show(msg, "Usuwanie wydarzenia", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+			MainForm^ main = safe_cast<MainForm^>(this->FindForm());
+			if (main != nullptr) {
+				main->loadControl(gcnew Tickets());
+			}
+		}
+		else {
+			MessageBox::Show("Błąd poczas usuwania wydarzenia", "Usuwanie wydarzenia", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
 	}
 }
