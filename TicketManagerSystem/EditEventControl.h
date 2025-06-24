@@ -175,7 +175,7 @@ namespace TicketManagerSystem {
 			this->addBtn->Name = L"addBtn";
 			this->addBtn->Size = System::Drawing::Size(153, 50);
 			this->addBtn->TabIndex = 36;
-			this->addBtn->Text = L"Stwórz";
+			this->addBtn->Text = L"Edytuj";
 			this->addBtn->UseVisualStyleBackColor = true;
 			this->addBtn->Click += gcnew System::EventHandler(this, &EditEventControl::addBtn_Click);
 			// 
