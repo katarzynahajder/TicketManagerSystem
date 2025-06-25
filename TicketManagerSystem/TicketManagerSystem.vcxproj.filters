@@ -48,6 +48,9 @@
     <ClCompile Include="EditProfileControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EditEventControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EditProfileControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditEventControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

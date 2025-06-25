@@ -404,3 +404,105 @@ bool cancelUserTicket(const std::string& username, int ticketId) {
     sqlite3_close(db);
     return true;
 }
+
+
+bool updateEvent(int eventId, const std::string& newTitle, const std::string& newDesc, const std::string& newDate, int newCount, const std::string& newCategory) {
+    sqlite3* db;
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
+        return false;
+    }
+
+    const char* sql = "UPDATE tickets SET title = ?, description = ?, date = ?, count = ?, category = ? WHERE id = ?";
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return false;
+    }
+
+    sqlite3_bind_text(stmt, 1, newTitle.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, newDesc.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 3, newDate.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 4, newCount);
+    sqlite3_bind_text(stmt, 5, newCategory.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 6, eventId);
+
+    bool success = sqlite3_step(stmt) == SQLITE_DONE;
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return success;
+}
+
+bool removeEvent(int eventId) {
+
+    sqlite3* db;
+    if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
+        return false;
+    }
+    const char* sqlRemoveEvent = "DELETE FROM tickets WHERE id = ?";
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(db, sqlRemoveEvent, -1, &stmt, nullptr) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, eventId);
+
+        if (sqlite3_step(stmt) != SQLITE_DONE) {
+            sqlite3_finalize(stmt);
+            sqlite3_close(db);
+            return false;
+        }
+    }
+    sqlite3_finalize(stmt);
+
+    const char* sqlRemoveAllTickets = "DELETE FROM reservations WHERE ticket_id = ?";
+
+    if (sqlite3_prepare_v2(db, sqlRemoveAllTickets, -1, &stmt, nullptr) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, eventId);
+
+        if (sqlite3_step(stmt) != SQLITE_DONE) {
+            sqlite3_finalize(stmt);
+            sqlite3_close(db);
+            return false;
+        }
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return true;
+
+
+    // eventId = ticketid
+    // DELETE FROM reservations WHERE ticket_id = 1;
+    // DELETE FROM ticket WHERE id = 1;
+}
+
+std::vector<Ticket> getEventInfo(int eventId) {
+    std::vector<Ticket> result;
+    sqlite3* db;
+    sqlite3_open("tms.db", &db);
+
+    const char* sql = "SELECT * FROM tickets WHERE id = ?";
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        sqlite3_close(db);
+        return result;
+    }
+
+    sqlite3_bind_int(stmt, 1, eventId);
+
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        Ticket t;
+        t.id = sqlite3_column_int(stmt, 0);
+        t.title = (const char*)sqlite3_column_text(stmt, 1);
+        t.description = (const char*)sqlite3_column_text(stmt, 2);
+        t.date = (const char*)sqlite3_column_text(stmt, 3);
+        t.count = sqlite3_column_int(stmt, 4);
+        t.category = (const char*)sqlite3_column_text(stmt, 5);
+        result.push_back(t);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return result;
+}

@@ -52,3 +52,9 @@ std::vector<UserInfo> getUserInfo(const std::string& username);
 bool updateUserInfo(const std::string& oldUsername, const std::string& newUsername, const std::string& email, const std::string& password);
 
 bool cancelUserTicket(const std::string& username, int ticketId);
+
+bool updateEvent(int eventId, const std::string& newTitle, const std::string& newDesc, const std::string& newDate, int newCount, const std::string& newCategory);
+
+bool removeEvent(int eventId);
+
+std::vector<Ticket> getEventInfo(int eventId);

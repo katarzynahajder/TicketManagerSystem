@@ -175,6 +175,11 @@ namespace TicketManagerSystem {
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
+			if (Session::Username != "admin") {
+				this->addTicketBtn->Visible = false;
+				this->showReservationsBtn->Location = Point(20, 20);
+				this->editProfileBtn->Location = Point(200, 20);
+			}
 		}
 
 #pragma endregion

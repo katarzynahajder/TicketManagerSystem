@@ -16,9 +16,14 @@ namespace TicketManagerSystem {
 		Label^ descriptionLabel;
 		Label^ countLabel;
 		Label^ categoryLabel;
+		Label^ adminLabel;
 		Button^ reserveBtn;
+		Button^ editEventBtn;
+		Button^ removeEventBtn;
 		int ticketId;
 
 	private: System::Void reserveBtn_Click(System::Object^ sender, System::EventArgs^ e);
+	private: Void editEventBtn_Click(Object^ sender, EventArgs^ e);
+	private: Void removeEventBtn_Click(Object^ sender, EventArgs^ e);
 	};
 }
