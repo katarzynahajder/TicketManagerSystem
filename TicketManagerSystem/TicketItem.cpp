@@ -18,8 +18,9 @@ namespace TicketManagerSystem {
 	TicketItem::TicketItem(int id, String^ title, String^ description, DateTime date, int count, String^ category) {
 		this->ticketId = id;
 		this->Size = Drawing::Size(1115, 175);
-		this->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+		this->BackColor = System::Drawing::Color::WhiteSmoke;
 		this->Margin = System::Windows::Forms::Padding(10, 10, 0, 10);
+		this->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 
 		titleLabel = gcnew Label();
 		titleLabel->Text = title;
@@ -49,7 +50,7 @@ namespace TicketManagerSystem {
 
 		adminLabel = gcnew Label();
 		adminLabel->Text = "Akcje administratora";
-		adminLabel->Location = Point(1000, 85);
+		adminLabel->Location = Point(1000, 10);
 		adminLabel->Size = Drawing::Size(300, 15);
 		adminLabel->Visible = false;
 		
@@ -62,7 +63,7 @@ namespace TicketManagerSystem {
 
 		editEventBtn = gcnew Button();
 		editEventBtn->Text = "Brak dostępu";
-		editEventBtn->Location = Point(1000, 100);
+		editEventBtn->Location = Point(1000, 25);
 		editEventBtn->Size = Drawing::Size(100, 30);
 		editEventBtn->BackColor = System::Drawing::Color::LightGray;
 		editEventBtn->Click += gcnew System::EventHandler(this, &TicketItem::editEventBtn_Click);
@@ -71,7 +72,7 @@ namespace TicketManagerSystem {
 
 		removeEventBtn = gcnew Button();
 		removeEventBtn->Text = "Brak dostępu";
-		removeEventBtn->Location = Point(1000, 135);
+		removeEventBtn->Location = Point(1000, 60);
 		removeEventBtn->Size = Drawing::Size(100, 30);
 		removeEventBtn->BackColor = System::Drawing::Color::LightGray;
 		removeEventBtn->Click += gcnew System::EventHandler(this, &TicketItem::removeEventBtn_Click);
@@ -84,7 +85,7 @@ namespace TicketManagerSystem {
 
 		if (nativeUsername == "admin") {
 			reserveBtn->Enabled = false;
-			reserveBtn->Text = "Brak dostępu";
+			reserveBtn->Visible = false;
 
 			editEventBtn->Text = "Edytuj wydarzenie";
 			editEventBtn->Enabled = true;

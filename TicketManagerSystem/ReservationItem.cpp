@@ -13,7 +13,7 @@ namespace TicketManagerSystem {
 	ReservationItem::ReservationItem(int ticketId, String^ username, String^ title, String^ description, DateTime date, String^ category) {
 		this->ticketId = ticketId;
 		this->username = username;
-		this->Size = Drawing::Size(1155, 120);
+		this->Size = Drawing::Size(1115, 120);
 		this->BackColor = System::Drawing::Color::WhiteSmoke;
 		this->Margin = System::Windows::Forms::Padding(10, 10, 0, 10);
 		this->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
