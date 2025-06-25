@@ -58,23 +58,20 @@ namespace TicketManagerSystem {
 		reserveBtn->Text = "Rezerwuj";
 		reserveBtn->Location = Point(1000, 10);
 		reserveBtn->Size = Drawing::Size(100, 30);
-		reserveBtn->BackColor = System::Drawing::Color::LightGray;
 		reserveBtn->Click += gcnew System::EventHandler(this, &TicketItem::reserveBtn_Click);
 
 		editEventBtn = gcnew Button();
-		editEventBtn->Text = "Brak dostępu";
+		editEventBtn->Text = "Edytuj wydarzenie";
 		editEventBtn->Location = Point(1000, 25);
 		editEventBtn->Size = Drawing::Size(100, 30);
-		editEventBtn->BackColor = System::Drawing::Color::LightGray;
 		editEventBtn->Click += gcnew System::EventHandler(this, &TicketItem::editEventBtn_Click);
 		editEventBtn->Enabled = false;
 		editEventBtn->Visible = false;
 
 		removeEventBtn = gcnew Button();
-		removeEventBtn->Text = "Brak dostępu";
+		removeEventBtn->Text = "Usuń wydarzenie";
 		removeEventBtn->Location = Point(1000, 60);
 		removeEventBtn->Size = Drawing::Size(100, 30);
-		removeEventBtn->BackColor = System::Drawing::Color::LightGray;
 		removeEventBtn->Click += gcnew System::EventHandler(this, &TicketItem::removeEventBtn_Click);
 		removeEventBtn->Enabled = false;
 		removeEventBtn->Visible = false;
@@ -87,11 +84,9 @@ namespace TicketManagerSystem {
 			reserveBtn->Enabled = false;
 			reserveBtn->Visible = false;
 
-			editEventBtn->Text = "Edytuj wydarzenie";
 			editEventBtn->Enabled = true;
 			editEventBtn->Visible = true;
 
-			removeEventBtn->Text = "Usuń wydarzenie";
 			removeEventBtn->Enabled = true;
 			removeEventBtn->Visible = true;
 

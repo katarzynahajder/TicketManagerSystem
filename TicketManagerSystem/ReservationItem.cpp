@@ -58,7 +58,6 @@ namespace TicketManagerSystem {
 		cancelBtn->Text = "Anuluj rezerwacje";
 		cancelBtn->Location = System::Drawing::Point(1000, 10);
 		cancelBtn->Size = System::Drawing::Size(100, 30);
-		cancelBtn->UseVisualStyleBackColor = true;
 		cancelBtn->Click += gcnew System::EventHandler(this, &ReservationItem::cancelBtn_Click);
 		this->Controls->Add(cancelBtn);
 	}
