@@ -1,9 +1,8 @@
 #pragma once
-
 #include <vector>
 #include <string>
 
-struct Ticket {
+struct Event {
 	int id;
 	std::string title;
 	std::string description;
@@ -33,13 +32,13 @@ bool userExists(const std::string& username);
 
 bool loginUser(const std::string& username, const std::string& password);
 
-bool insertTicket(const std::string& title, const std::string& desc, const std::string& date, int count, const std::string& category);
+bool createEvent(const std::string& title, const std::string& desc, const std::string& date, int count, const std::string& category);
 
-std::vector<Ticket> loadTickets();
+std::vector<Event> loadEvents();
 
-bool insertReservation(const std::string& username, int ticketId);
+bool createReservation(const std::string& username, int ticketId);
 
-bool decrementTicketCount(int ticketId);
+bool decrementTicketCount(int eventId);
 
 bool hasUserReserved(const std::string& username, int ticketId);
 
@@ -57,4 +56,4 @@ bool updateEvent(int eventId, const std::string& newTitle, const std::string& ne
 
 bool removeEvent(int eventId);
 
-std::vector<Ticket> getEventInfo(int eventId);
+std::vector<Event> getEventInfo(int eventId);

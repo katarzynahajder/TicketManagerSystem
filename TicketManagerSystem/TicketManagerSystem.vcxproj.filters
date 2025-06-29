@@ -30,13 +30,13 @@
     <ClCompile Include="UserProfile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tickets.cpp">
+    <ClCompile Include="EventList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TicketForm.cpp">
+    <ClCompile Include="CreateEventForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TicketItem.cpp">
+    <ClCompile Include="EventItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Reservations.cpp">
@@ -68,16 +68,16 @@
     <ClInclude Include="UserProfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tickets.h">
+    <ClInclude Include="EventList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TicketForm.h">
+    <ClInclude Include="CreateEventForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Session.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TicketItem.h">
+    <ClInclude Include="EventItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Reservations.h">

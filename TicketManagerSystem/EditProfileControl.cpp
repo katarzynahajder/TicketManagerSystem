@@ -11,10 +11,7 @@
 using namespace TicketManagerSystem;
 
 Void EditProfileControl::cancelBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew UserProfile());
-    }
+    MainForm::Instance->loadControl(gcnew UserProfile());
 }
 
 Void EditProfileControl::EditProfileControl_Load(System::Object^ sender, System::EventArgs^ e) {
@@ -54,10 +51,7 @@ Void EditProfileControl::editBtn_Click(System::Object^ sender, System::EventArgs
     if (updateUserInfo(oldU, newU, email, pass)) {
         MessageBox::Show("Dane konta zosta³y zakutalizowane.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
         Session::Username = newUsername;
-        MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-        if (main != nullptr) {
-            main->loadControl(gcnew UserProfile());
-        }
+        MainForm::Instance->loadControl(gcnew UserProfile());
     }
     else {
         MessageBox::Show("Wyst¹pi³ b³¹d podczas zmiany danych konta.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);

@@ -2,7 +2,7 @@
 #include "MainForm.h"
 #include "LoginControl.h"
 #include "RegisterControl.h"
-#include "Tickets.h"
+#include "EventList.h"
 #include "Session.h"
 
 #pragma unmanaged
@@ -12,10 +12,7 @@
 using namespace TicketManagerSystem;
 
 void RegisterControl::loginLinkLabel_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew LoginControl());
-    }
+    MainForm::Instance->loadControl(gcnew LoginControl());
 }
 void RegisterControl::registerBtn_Click(System::Object^ sender, System::EventArgs^ e) {
     String^ username = usernameBox->Text->Trim();
@@ -47,10 +44,7 @@ void RegisterControl::registerBtn_Click(System::Object^ sender, System::EventArg
 
     if (success) {
         MessageBox::Show("Konto zosta³o utworzone! Mo¿esz siê zalogowaæ.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
-        MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-        if (main != nullptr) {
-            main->loadControl(gcnew LoginControl());
-        }
+        MainForm::Instance->loadControl(gcnew LoginControl());
     }
     else {
         MessageBox::Show("Rejestracja nie powiod³a siê. Spróbuj ponownie.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);

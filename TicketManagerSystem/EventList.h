@@ -1,6 +1,5 @@
 #pragma once
-
-#include "TicketItem.h"
+#include "EventItem.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -11,17 +10,17 @@ using namespace System::Drawing;
 
 namespace TicketManagerSystem {
 
-	public ref class Tickets : public System::Windows::Forms::UserControl
+	public ref class EventList : public System::Windows::Forms::UserControl
 	{
 	public:
-		Tickets(void)
+		EventList(void)
 		{
 			InitializeComponent();
-			this->LoadTickets();
+			this->loadEventList();
 		}
 
 	protected:
-		~Tickets()
+		~EventList()
 		{
 			if (components)
 			{
@@ -55,7 +54,7 @@ namespace TicketManagerSystem {
 			this->userBtn->TabIndex = 0;
 			this->userBtn->Text = L"Moje konto";
 			this->userBtn->UseVisualStyleBackColor = true;
-			this->userBtn->Click += gcnew System::EventHandler(this, &Tickets::userBtn_Click);
+			this->userBtn->Click += gcnew System::EventHandler(this, &EventList::userBtn_Click);
 			// 
 			// ticketListPanel
 			// 
@@ -83,7 +82,7 @@ namespace TicketManagerSystem {
 			this->logoutBtn->TabIndex = 1;
 			this->logoutBtn->Text = L"Wyloguj siê";
 			this->logoutBtn->UseVisualStyleBackColor = true;
-			this->logoutBtn->Click += gcnew System::EventHandler(this, &Tickets::logoutBtn_Click);
+			this->logoutBtn->Click += gcnew System::EventHandler(this, &EventList::logoutBtn_Click);
 			// 
 			// label
 			// 
@@ -98,7 +97,7 @@ namespace TicketManagerSystem {
 			this->label->TabIndex = 2;
 			this->label->Text = L"Wydarzenia";
 			// 
-			// Tickets
+			// Events
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -115,7 +114,7 @@ namespace TicketManagerSystem {
 		}
 #pragma endregion
 	private: System::Void userBtn_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void LoadTickets();
+	private: System::Void loadEventList();
 	private: System::Void logoutBtn_Click(System::Object^ sender, System::EventArgs^ e);
 	};
 }

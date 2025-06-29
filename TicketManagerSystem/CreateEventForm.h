@@ -10,16 +10,16 @@ using namespace System::Drawing;
 
 namespace TicketManagerSystem {
 
-	public ref class TicketForm : public System::Windows::Forms::UserControl
+	public ref class CreateEventForm : public System::Windows::Forms::UserControl
 	{
 	public:
-		TicketForm(void)
+		CreateEventForm(void)
 		{
 			InitializeComponent();
 		}
 
 	protected:
-		~TicketForm()
+		~CreateEventForm()
 		{
 			if (components)
 			{
@@ -84,7 +84,7 @@ namespace TicketManagerSystem {
 			this->addBtn->TabIndex = 22;
 			this->addBtn->Text = L"Stwórz";
 			this->addBtn->UseVisualStyleBackColor = true;
-			this->addBtn->Click += gcnew System::EventHandler(this, &TicketForm::addBtn_Click);
+			this->addBtn->Click += gcnew System::EventHandler(this, &CreateEventForm::addBtn_Click);
 			// 
 			// dateLabel
 			// 
@@ -219,7 +219,7 @@ namespace TicketManagerSystem {
 			this->cancelBtn->TabIndex = 30;
 			this->cancelBtn->Text = L"Anuluj";
 			this->cancelBtn->UseVisualStyleBackColor = true;
-			this->cancelBtn->Click += gcnew System::EventHandler(this, &TicketForm::cancelBtn_Click);
+			this->cancelBtn->Click += gcnew System::EventHandler(this, &CreateEventForm::cancelBtn_Click);
 			// 
 			// TicketForm
 			// 

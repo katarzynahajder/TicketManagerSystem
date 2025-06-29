@@ -1,5 +1,5 @@
 #include <msclr/marshal_cppstd.h>
-#include "TicketForm.h"
+#include "CreateEventForm.h"
 #include "UserProfile.h"
 #include "MainForm.h"
 
@@ -9,7 +9,7 @@
 
 using namespace TicketManagerSystem;
 
-Void TicketForm::addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+Void CreateEventForm::addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
     String^ title = usernameBox->Text->Trim();
     String^ description = descriptionBox->Text->Trim();
     DateTime date = dateTimePicker->Value;
@@ -27,21 +27,13 @@ Void TicketForm::addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
     std::string nativeCategory = context.marshal_as<std::string>(category);
     std::string nativeDate = context.marshal_as<std::string>(date.ToString("yyyy-MM-dd"));
 
-    insertTicket(nativeTitle, nativeDesc, nativeDate, count, nativeCategory);
+    createEvent(nativeTitle, nativeDesc, nativeDate, count, nativeCategory);
 
     MessageBox::Show("Wydarzenie dodane.");
 
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew UserProfile());
-    }
-
+    MainForm::Instance->loadControl(gcnew UserProfile());
 }
 
-Void TicketForm::cancelBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew UserProfile());
-    }
-
+Void CreateEventForm::cancelBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+    MainForm::Instance->loadControl(gcnew UserProfile());
 }

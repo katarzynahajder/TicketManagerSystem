@@ -14,9 +14,12 @@ namespace TicketManagerSystem {
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
+		static MainForm^ Instance;
+
 		MainForm(void)
 		{
 			InitializeComponent();
+			Instance = this;
 			loadControl(gcnew MainMenuControl());
 		}
 

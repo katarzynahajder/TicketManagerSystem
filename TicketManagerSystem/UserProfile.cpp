@@ -1,8 +1,8 @@
 #include <msclr/marshal_cppstd.h>
 #include "UserProfile.h"
 #include "MainForm.h"
-#include "TicketForm.h"
-#include "Tickets.h"
+#include "CreateEventForm.h"
+#include "EventList.h"
 #include "Reservations.h"
 #include "Session.h"
 #include "EditProfileControl.h"
@@ -13,25 +13,16 @@
 
 using namespace TicketManagerSystem;
 
-Void UserProfile::addTicketBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew TicketForm());
-    }
+Void UserProfile::createEventBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+    MainForm::Instance->loadControl(gcnew CreateEventForm());
 }
 
 Void UserProfile::showReservationsBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew Reservations());
-    }
+    MainForm::Instance->loadControl(gcnew Reservations());
 }
 
 Void UserProfile::backBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew Tickets());
-    }
+    MainForm::Instance->loadControl(gcnew EventList());
 }
 
 Void UserProfile::UserProfile_Load(System::Object^ sender, System::EventArgs^ e) {
@@ -65,8 +56,5 @@ Void UserProfile::UserProfile_Load(System::Object^ sender, System::EventArgs^ e)
 }
 
 Void UserProfile::editProfileBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew EditProfileControl());
-    }
+    MainForm::Instance->loadControl(gcnew EditProfileControl());
 }

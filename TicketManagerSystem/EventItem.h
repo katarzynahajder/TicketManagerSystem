@@ -6,9 +6,9 @@ using namespace System::Drawing;
 
 namespace TicketManagerSystem {
 
-	public ref class TicketItem : public UserControl {
+	public ref class EventItem : public UserControl {
 	public:
-		TicketItem(int id, String^ title, String^ description, DateTime date, int count, String^ category);
+		EventItem(int id, String^ title, String^ description, DateTime date, int count, String^ category);
 
 	private:
 		Label^ titleLabel;

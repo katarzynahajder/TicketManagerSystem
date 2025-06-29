@@ -65,7 +65,7 @@ namespace TicketManagerSystem {
 			this->addTicketBtn->TabIndex = 1;
 			this->addTicketBtn->Text = L"Dodaj wydarzenie";
 			this->addTicketBtn->UseVisualStyleBackColor = true;
-			this->addTicketBtn->Click += gcnew System::EventHandler(this, &UserProfile::addTicketBtn_Click);
+			this->addTicketBtn->Click += gcnew System::EventHandler(this, &UserProfile::createEventBtn_Click);
 			// 
 			// showReservationsBtn
 			// 
@@ -183,7 +183,7 @@ namespace TicketManagerSystem {
 		}
 
 #pragma endregion
-	private: System::Void addTicketBtn_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void createEventBtn_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void backBtn_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void showReservationsBtn_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void UserProfile_Load(System::Object^ sender, System::EventArgs^ e);

@@ -68,10 +68,7 @@ namespace TicketManagerSystem {
 		std::string uname = msclr::interop::marshal_as<std::string>(username);
 
 		if (cancelUserTicket(uname, ticketId)) {
-			MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-			if (main != nullptr) {
-				main->loadControl(gcnew Reservations());
-			}
+			MainForm::Instance->loadControl(gcnew Reservations());
 
 			if (Session::Username == "admin") {
 				MessageBox::Show("Anulowano bilet u¿ytkownikowi.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);

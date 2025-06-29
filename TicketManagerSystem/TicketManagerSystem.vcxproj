@@ -138,9 +138,9 @@
     <ClCompile Include="RegisterControl.cpp" />
     <ClCompile Include="ReservationItem.cpp" />
     <ClCompile Include="Reservations.cpp" />
-    <ClCompile Include="TicketForm.cpp" />
-    <ClCompile Include="TicketItem.cpp" />
-    <ClCompile Include="Tickets.cpp" />
+    <ClCompile Include="CreateEventForm.cpp" />
+    <ClCompile Include="EventItem.cpp" />
+    <ClCompile Include="EventList.cpp" />
     <ClCompile Include="UserProfile.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,13 +169,13 @@
       <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="Session.h" />
-    <ClInclude Include="TicketForm.h">
+    <ClInclude Include="CreateEventForm.h">
       <FileType>CppControl</FileType>
     </ClInclude>
-    <ClInclude Include="TicketItem.h">
+    <ClInclude Include="EventItem.h">
       <FileType>CppControl</FileType>
     </ClInclude>
-    <ClInclude Include="Tickets.h">
+    <ClInclude Include="EventList.h">
       <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="UserProfile.h">
@@ -207,14 +207,14 @@
     <EmbeddedResource Include="Reservations.resx">
       <DependentUpon>Reservations.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TicketForm.resx">
-      <DependentUpon>TicketForm.h</DependentUpon>
+    <EmbeddedResource Include="CreateEventForm.resx">
+      <DependentUpon>CreateEventForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TicketItem.resx">
-      <DependentUpon>TicketItem.h</DependentUpon>
+    <EmbeddedResource Include="EventItem.resx">
+      <DependentUpon>EventItem.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tickets.resx">
-      <DependentUpon>Tickets.h</DependentUpon>
+    <EmbeddedResource Include="EventList.resx">
+      <DependentUpon>EventList.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserProfile.resx">
       <DependentUpon>UserProfile.h</DependentUpon>

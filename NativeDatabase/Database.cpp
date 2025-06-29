@@ -93,12 +93,12 @@ bool loginUser(const std::string& username, const std::string& password) {
     return authenticated;
 }
 
-bool insertTicket(const std::string& title, const std::string& desc, const std::string& date, int count, const std::string& category) {
+bool createEvent(const std::string& title, const std::string& desc, const std::string& date, int count, const std::string& category) {
     sqlite3* db;
     sqlite3_open("tms.db", &db);
 
-    const char* createTicketsSQL =
-        "CREATE TABLE IF NOT EXISTS tickets ("
+    const char* createEventsSQL =
+        "CREATE TABLE IF NOT EXISTS events ("
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
         "title TEXT NOT NULL,"
         "description TEXT,"
@@ -108,14 +108,14 @@ bool insertTicket(const std::string& title, const std::string& desc, const std::
         ");";
 
     char* errMsg = nullptr;
-    if (sqlite3_exec(db, createTicketsSQL, nullptr, nullptr, &errMsg) != SQLITE_OK) {
+    if (sqlite3_exec(db, createEventsSQL, nullptr, nullptr, &errMsg) != SQLITE_OK) {
         sqlite3_free(errMsg);
         sqlite3_close(db);
         return false;
     }
 
     sqlite3_stmt* stmt;
-    const char* sql = "INSERT INTO tickets (title, description, date, count, category) VALUES (?, ?, ?, ?, ?)";
+    const char* sql = "INSERT INTO events (title, description, date, count, category) VALUES (?, ?, ?, ?, ?)";
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
         sqlite3_close(db);
@@ -134,32 +134,32 @@ bool insertTicket(const std::string& title, const std::string& desc, const std::
     return success;
 }
 
-std::vector<Ticket> loadTickets() {
-    std::vector<Ticket> tickets;
+std::vector<Event> loadEvents() {
+    std::vector<Event> events;
     sqlite3* db;
     sqlite3_open("tms.db", &db);
 
-    const char* sql = "SELECT id, title, description, date, count, category FROM tickets";
+    const char* sql = "SELECT id, title, description, date, count, category FROM events";
     sqlite3_stmt* stmt;
     sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        Ticket t;
-        t.id = sqlite3_column_int(stmt, 0);
-        t.title = (const char*)sqlite3_column_text(stmt, 1);
-        t.description = (const char*)sqlite3_column_text(stmt, 2);
-        t.date = (const char*)sqlite3_column_text(stmt, 3);
-        t.count = sqlite3_column_int(stmt, 4);
-        t.category = (const char*)sqlite3_column_text(stmt, 5);
-        tickets.push_back(t);
+        Event e;
+        e.id = sqlite3_column_int(stmt, 0);
+        e.title = (const char*)sqlite3_column_text(stmt, 1);
+        e.description = (const char*)sqlite3_column_text(stmt, 2);
+        e.date = (const char*)sqlite3_column_text(stmt, 3);
+        e.count = sqlite3_column_int(stmt, 4);
+        e.category = (const char*)sqlite3_column_text(stmt, 5);
+        events.push_back(e);
     }
 
     sqlite3_finalize(stmt);
     sqlite3_close(db);
-    return tickets;
+    return events;
 }
 
-bool insertReservation(const std::string& username, int ticketId) {
+bool createReservation(const std::string& username, int ticketId) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK)
         return false;
@@ -199,7 +199,7 @@ bool decrementTicketCount(int ticketId) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK) return false;
 
-    const char* sql = "UPDATE tickets SET count = count - 1 WHERE id = ? AND count > 0;";
+    const char* sql = "UPDATE events SET count = count - 1 WHERE id = ? AND count > 0;";
     sqlite3_stmt* stmt;
 
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
@@ -251,14 +251,14 @@ std::vector<Reservation> loadReservations(const std::string& username) {
         sql = R"(
 			SELECT r.ticket_id, r.username, t.title, t.description, t.date, t.category
 			FROM reservations r
-			JOIN tickets t ON r.ticket_id = t.id
+			JOIN events t ON r.ticket_id = t.id
 		)";
     }
     else {
         sql = R"(
 			SELECT r.ticket_id, r.username, t.title, t.description, t.date, t.category
 			FROM reservations r
-			JOIN tickets t ON r.ticket_id = t.id
+			JOIN events t ON r.ticket_id = t.id
 			WHERE r.username = ?
 		)";
     }
@@ -388,7 +388,7 @@ bool cancelUserTicket(const std::string& username, int ticketId) {
     }
     sqlite3_finalize(stmt);
 
-    const char* sqlEventIncreaseCount = "UPDATE tickets SET count = count + 1 WHERE id = ?";
+    const char* sqlEventIncreaseCount = "UPDATE events SET count = count + 1 WHERE id = ?";
 
     if (sqlite3_prepare_v2(db, sqlEventIncreaseCount, -1, &stmt, nullptr) == SQLITE_OK) {
         sqlite3_bind_int(stmt, 1, ticketId);
@@ -412,7 +412,7 @@ bool updateEvent(int eventId, const std::string& newTitle, const std::string& ne
         return false;
     }
 
-    const char* sql = "UPDATE tickets SET title = ?, description = ?, date = ?, count = ?, category = ? WHERE id = ?";
+    const char* sql = "UPDATE events SET title = ?, description = ?, date = ?, count = ?, category = ? WHERE id = ?";
 
     sqlite3_stmt* stmt;
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
@@ -440,7 +440,7 @@ bool removeEvent(int eventId) {
     if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
         return false;
     }
-    const char* sqlRemoveEvent = "DELETE FROM tickets WHERE id = ?";
+    const char* sqlRemoveEvent = "DELETE FROM events WHERE id = ?";
 
     sqlite3_stmt* stmt;
     if (sqlite3_prepare_v2(db, sqlRemoveEvent, -1, &stmt, nullptr) == SQLITE_OK) {
@@ -469,19 +469,14 @@ bool removeEvent(int eventId) {
     sqlite3_finalize(stmt);
     sqlite3_close(db);
     return true;
-
-
-    // eventId = ticketid
-    // DELETE FROM reservations WHERE ticket_id = 1;
-    // DELETE FROM ticket WHERE id = 1;
 }
 
-std::vector<Ticket> getEventInfo(int eventId) {
-    std::vector<Ticket> result;
+std::vector<Event> getEventInfo(int eventId) {
+    std::vector<Event> result;
     sqlite3* db;
     sqlite3_open("tms.db", &db);
 
-    const char* sql = "SELECT * FROM tickets WHERE id = ?";
+    const char* sql = "SELECT * FROM events WHERE id = ?";
 
     sqlite3_stmt* stmt;
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
@@ -492,14 +487,14 @@ std::vector<Ticket> getEventInfo(int eventId) {
     sqlite3_bind_int(stmt, 1, eventId);
 
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        Ticket t;
-        t.id = sqlite3_column_int(stmt, 0);
-        t.title = (const char*)sqlite3_column_text(stmt, 1);
-        t.description = (const char*)sqlite3_column_text(stmt, 2);
-        t.date = (const char*)sqlite3_column_text(stmt, 3);
-        t.count = sqlite3_column_int(stmt, 4);
-        t.category = (const char*)sqlite3_column_text(stmt, 5);
-        result.push_back(t);
+        Event e;
+        e.id = sqlite3_column_int(stmt, 0);
+        e.title = (const char*)sqlite3_column_text(stmt, 1);
+        e.description = (const char*)sqlite3_column_text(stmt, 2);
+        e.date = (const char*)sqlite3_column_text(stmt, 3);
+        e.count = sqlite3_column_int(stmt, 4);
+        e.category = (const char*)sqlite3_column_text(stmt, 5);
+        result.push_back(e);
     }
 
     sqlite3_finalize(stmt);

@@ -2,7 +2,7 @@
 #include "MainForm.h"
 #include "LoginControl.h"
 #include "RegisterControl.h"
-#include "Tickets.h"
+#include "EventList.h"
 #include "Session.h"
 
 #pragma unmanaged
@@ -12,10 +12,7 @@
 using namespace TicketManagerSystem;
 
 void LoginControl::registerLinkLabel_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew RegisterControl());
-    }
+    MainForm::Instance->loadControl(gcnew RegisterControl());
 }
 
 void LoginControl::loginBtn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -36,10 +33,7 @@ void LoginControl::loginBtn_Click(System::Object^ sender, System::EventArgs^ e) 
     if (success) {
         MessageBox::Show("Zalogowano pomyœlnie!", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
         Session::Username = username;
-        MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-        if (main != nullptr) {
-            main->loadControl(gcnew Tickets());
-        }
+        MainForm::Instance->loadControl(gcnew EventList());
     }
     else {
         MessageBox::Show("Nieprawid³owy login lub has³o.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);

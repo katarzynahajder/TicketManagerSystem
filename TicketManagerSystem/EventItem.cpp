@@ -1,8 +1,8 @@
 ﻿#include <msclr/marshal_cppstd.h>
-#include "TicketItem.h"
+#include "EventItem.h"
 #include "Session.h"
 #include "MainForm.h"
-#include "Tickets.h"
+#include "EventList.h"
 #include "EditEventControl.h"
 
 #pragma unmanaged
@@ -15,7 +15,7 @@ using namespace System::Windows::Forms;
 
 namespace TicketManagerSystem {
 
-	TicketItem::TicketItem(int id, String^ title, String^ description, DateTime date, int count, String^ category) {
+	EventItem::EventItem(int id, String^ title, String^ description, DateTime date, int count, String^ category) {
 		this->ticketId = id;
 		this->Size = Drawing::Size(1115, 175);
 		this->BackColor = System::Drawing::Color::WhiteSmoke;
@@ -58,13 +58,13 @@ namespace TicketManagerSystem {
 		reserveBtn->Text = "Rezerwuj";
 		reserveBtn->Location = Point(1000, 10);
 		reserveBtn->Size = Drawing::Size(100, 30);
-		reserveBtn->Click += gcnew System::EventHandler(this, &TicketItem::reserveBtn_Click);
+		reserveBtn->Click += gcnew System::EventHandler(this, &EventItem::reserveBtn_Click);
 
 		editEventBtn = gcnew Button();
 		editEventBtn->Text = "Edytuj wydarzenie";
 		editEventBtn->Location = Point(1000, 25);
 		editEventBtn->Size = Drawing::Size(100, 30);
-		editEventBtn->Click += gcnew System::EventHandler(this, &TicketItem::editEventBtn_Click);
+		editEventBtn->Click += gcnew System::EventHandler(this, &EventItem::editEventBtn_Click);
 		editEventBtn->Enabled = false;
 		editEventBtn->Visible = false;
 
@@ -72,7 +72,7 @@ namespace TicketManagerSystem {
 		removeEventBtn->Text = "Usuń wydarzenie";
 		removeEventBtn->Location = Point(1000, 60);
 		removeEventBtn->Size = Drawing::Size(100, 30);
-		removeEventBtn->Click += gcnew System::EventHandler(this, &TicketItem::removeEventBtn_Click);
+		removeEventBtn->Click += gcnew System::EventHandler(this, &EventItem::removeEventBtn_Click);
 		removeEventBtn->Enabled = false;
 		removeEventBtn->Visible = false;
 		
@@ -113,7 +113,7 @@ namespace TicketManagerSystem {
 		this->Controls->Add(editEventBtn);
 		this->Controls->Add(removeEventBtn);
 	}
-	void TicketItem::reserveBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+	void EventItem::reserveBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 		msclr::interop::marshal_context context;
 		std::string nativeUsername = context.marshal_as<std::string>(Session::Username); 
 		
@@ -122,13 +122,10 @@ namespace TicketManagerSystem {
 			return;
 		}
 		
-		bool success = insertReservation(nativeUsername, this->ticketId);
+		bool success = createReservation(nativeUsername, this->ticketId);
 		decrementTicketCount(this->ticketId);
 
-		MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-		if (main != nullptr) {
-			main->loadControl(gcnew Tickets());
-		}
+		MainForm::Instance->loadControl(gcnew EventList());
 
 		if (success) {
 			String^ msg = "Zarezerwowano bilet na: " + titleLabel->Text;
@@ -136,14 +133,11 @@ namespace TicketManagerSystem {
 			this->Controls->Remove(reserveBtn);
 		}
 	}
-	void TicketItem::editEventBtn_Click(Object^ sender, EventArgs^ e) {
-		MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-		if (main != nullptr) {
-			main->loadControl(gcnew EditEventControl(this->ticketId));
-		}
+	void EventItem::editEventBtn_Click(Object^ sender, EventArgs^ e) {
+		MainForm::Instance->loadControl(gcnew EditEventControl(this->ticketId));
 	}
 
-	void TicketItem::removeEventBtn_Click(Object^ sender, EventArgs^ e) {
+	void EventItem::removeEventBtn_Click(Object^ sender, EventArgs^ e) {
 
 		if (removeEvent(this->ticketId)) {
 
@@ -151,10 +145,7 @@ namespace TicketManagerSystem {
 
 			MessageBox::Show(msg, "Usuwanie wydarzenia", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
-			MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-			if (main != nullptr) {
-				main->loadControl(gcnew Tickets());
-			}
+			MainForm::Instance->loadControl(gcnew EventList());
 		}
 		else {
 			MessageBox::Show("Błąd poczas usuwania wydarzenia", "Usuwanie wydarzenia", MessageBoxButtons::OK, MessageBoxIcon::Error);

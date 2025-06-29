@@ -3,7 +3,7 @@
 #include "MainForm.h"
 #include "UserProfile.h"
 #include "Session.h"
-#include "Tickets.h"
+#include "EventList.h"
 
 #pragma unmanaged
 #include "../NativeDatabase/Database.h"
@@ -12,10 +12,10 @@
 using namespace TicketManagerSystem;
 
 Void EditEventControl::EditEventControl_Load(System::Object^ sender, System::EventArgs^ e) {
-    std::vector<Ticket> info = getEventInfo(this->eventId);
+    std::vector<Event> info = getEventInfo(this->eventId);
 
     if (!info.empty()) {
-        Ticket event = info[0];
+        Event event = info[0];
 
         titleBox->Text = gcnew String(event.title.c_str());
         dateTimeBox->Text = gcnew String(event.date.c_str());
@@ -33,10 +33,7 @@ Void EditEventControl::EditEventControl_Load(System::Object^ sender, System::Eve
 }
 
 Void EditEventControl::cancelBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-    if (main != nullptr) {
-        main->loadControl(gcnew Tickets());
-    }
+    MainForm::Instance->loadControl(gcnew EventList());
 }
 
 Void EditEventControl::addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -54,10 +51,7 @@ Void EditEventControl::addBtn_Click(System::Object^ sender, System::EventArgs^ e
 
     if (updateEvent(eventId, newT, newDesc, newDT, newTicketCount, newCat)) {
         MessageBox::Show("Dane wydarzenia zosta³y zaktualizowane.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
-        MainForm^ main = safe_cast<MainForm^>(this->FindForm());
-        if (main != nullptr) {
-            main->loadControl(gcnew Tickets());
-        }
+        MainForm::Instance->loadControl(gcnew EventList());
     }
     else {
         MessageBox::Show("Wyst¹pi³ b³¹d podczas zmiany danych wydarzenia.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
