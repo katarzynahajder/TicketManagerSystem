@@ -29,7 +29,7 @@ Void CreateEventForm::addBtn_Click(System::Object^ sender, System::EventArgs^ e)
 
     createEvent(nativeTitle, nativeDesc, nativeDate, count, nativeCategory);
 
-    MessageBox::Show("Wydarzenie dodane.");
+    MessageBox::Show("Wydarzenie dodane.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
     MainForm::Instance->loadControl(gcnew UserProfile());
 }
