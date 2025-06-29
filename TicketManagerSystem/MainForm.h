@@ -40,16 +40,19 @@ namespace TicketManagerSystem {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->SuspendLayout();
 			// 
 			// MainForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Inherit;
-			this->ClientSize = System::Drawing::Size(1149, 661);
+			this->ClientSize = System::Drawing::Size(1141, 636);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MaximumSize = System::Drawing::Size(1165, 700);
 			this->MinimumSize = System::Drawing::Size(1165, 700);
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"Ticket Manager System";
 			this->ResumeLayout(false);
 
 		}
