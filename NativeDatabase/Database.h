@@ -2,6 +2,11 @@
 #include <vector>
 #include <string>
 
+// ==============================================
+// Plik nag³ówkowy zawieraj¹cy definicje funkcji do obs³ugi bazy danych (SQLite).
+// Znajduj¹ siê tu struktury danych (np. Event, Reservation, UserInfo) oraz deklaracje funkcji typu CRUD.
+// ==============================================
+
 struct Event {
 	int id;
 	std::string title;

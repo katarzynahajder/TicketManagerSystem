@@ -11,8 +11,14 @@
 #include "../NativeDatabase/Database.h"
 #pragma managed
 
+// ==============================================
+// Implementacja klasy UserProfile.
+// Klasa wyœwietla profil u¿ytkownika; umo¿liwia tworzenie wydarzeñ (dla admina), wyœwietlanie rezerwacji oraz edycjê profilu.
+// ==============================================
+
 using namespace TicketManagerSystem;
 
+// akcja przycisku tworzenia wydarzenia, wyœwietlania rezerwacji i powrotu do listy wydarzeñ
 Void UserProfile::createEventBtn_Click(System::Object^ sender, System::EventArgs^ e) {
     MainForm::Instance->loadControl(gcnew CreateEventForm());
 }
@@ -25,6 +31,7 @@ Void UserProfile::backBtn_Click(System::Object^ sender, System::EventArgs^ e) {
     MainForm::Instance->loadControl(gcnew EventList());
 }
 
+// za³adowanie profilu u¿ytkownika
 Void UserProfile::UserProfile_Load(System::Object^ sender, System::EventArgs^ e) {
     String^ username = Session::Username;
 
@@ -42,6 +49,7 @@ Void UserProfile::UserProfile_Load(System::Object^ sender, System::EventArgs^ e)
         emailLabel->Text = "E-Mail: [Nie wczytano]";
     }
 
+	// pobranie iloœci biletów u¿ytkownika
     int amountOfTickets = getUserTicketCount(uname);
 
     if (username == "admin") {
@@ -55,6 +63,8 @@ Void UserProfile::UserProfile_Load(System::Object^ sender, System::EventArgs^ e)
     }
 }
 
+// akcja przycisku edycji profilu
 Void UserProfile::editProfileBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+	// przejœcie do kontrolki edycji profilu
     MainForm::Instance->loadControl(gcnew EditProfileControl());
 }

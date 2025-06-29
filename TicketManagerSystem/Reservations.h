@@ -10,6 +10,11 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Klasa odpowiada za wyœwietlanie zarezerwowanych wydarzeñ.
+// Dzia³a dynamicznie: dla admina wyœwietla wszystkie rezerwacje, a dla u¿ytkownika tylko jego.
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class Reservations : public System::Windows::Forms::UserControl

@@ -8,17 +8,24 @@
 #include "../NativeDatabase/Database.h"
 #pragma managed
 
+// ==============================================
+// Implementacja klasy EditProfileControl.
+// Ta klasa s³u¿y do edycji danych u¿ytkownika.
+// ==============================================
+
 using namespace TicketManagerSystem;
 
+// akcja przycisku anulowania
 Void EditProfileControl::cancelBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+	// przejœcie do profilu u¿ytkownika bez zmian
     MainForm::Instance->loadControl(gcnew UserProfile());
 }
 
 Void EditProfileControl::EditProfileControl_Load(System::Object^ sender, System::EventArgs^ e) {
+	// pobranie nazwy u¿ytkownika z sesji
     String^ username = Session::Username;
-
     std::string uname = msclr::interop::marshal_as<std::string>(username);
-
+	// pobranie informacji o u¿ytkowniku z bazy danych
     std::vector<UserInfo> info = getUserInfo(uname);
 
     if (!info.empty()) {
@@ -37,17 +44,21 @@ Void EditProfileControl::EditProfileControl_Load(System::Object^ sender, System:
     }
 }
 
+// akcja przycisku edycji profilu
 Void EditProfileControl::editBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+	// pobranie danych z pól tekstowych i sesji
     String^ oldUsername = Session::Username;
     String^ newUsername = usernameBox->Text;
     String^ newEmail = emailBox->Text;
     String^ newPassword = passwordBox->Text;
 
+	// konwersja danych
     std::string oldU = msclr::interop::marshal_as<std::string>(oldUsername);
     std::string newU = msclr::interop::marshal_as<std::string>(newUsername);
     std::string email = msclr::interop::marshal_as<std::string>(newEmail);
     std::string pass = msclr::interop::marshal_as<std::string>(newPassword);
 
+	// wywo³anie funkcji aktualizuj¹cej dane u¿ytkownika
     if (updateUserInfo(oldU, newU, email, pass)) {
         MessageBox::Show("Dane konta zosta³y zakutalizowane.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
         Session::Username = newUsername;

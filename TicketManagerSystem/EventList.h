@@ -8,6 +8,11 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Plik zawiera deklaracjê klasy EventList – kontrolki wyœwietlaj¹cej listê wydarzeñ.
+// Umo¿liwia u¿ytkownikowi rezerwacjê oraz przegl¹d wydarzeñ.
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class EventList : public System::Windows::Forms::UserControl

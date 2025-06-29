@@ -9,6 +9,10 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Panel wyœwietlaj¹cy profil u¿ytkownika.
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class UserProfile : public System::Windows::Forms::UserControl

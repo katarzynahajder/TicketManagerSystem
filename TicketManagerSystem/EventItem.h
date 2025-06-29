@@ -4,6 +4,12 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Drawing;
 
+// ==============================================
+// Reprezentacja graficzna pojedynczego wydarzenia.
+// Zawiera dane: tytu³, opis, data, kategoria, liczba miejsc.
+// Umo¿liwia wykonanie rezerwacji (jeœli nie zosta³o to wczeœniej zrobione).
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class EventItem : public UserControl {

@@ -8,8 +8,14 @@
 #include "../NativeDatabase/Database.h"
 #pragma managed
 
+// ==============================================
+// Implementacja klasy ReservationItem.
+// Klasa ta reprezentuje pojedynczy element rezerwacji.
+// ==============================================
+
 namespace TicketManagerSystem {
 
+	// konstruktor klasy ReservationItem
 	ReservationItem::ReservationItem(int ticketId, String^ username, String^ title, String^ description, DateTime date, String^ category) {
 		this->ticketId = ticketId;
 		this->username = username;
@@ -20,7 +26,7 @@ namespace TicketManagerSystem {
 
 		int top = 10;
 
-
+		// je¿eli u¿ytkownik jest adminem, dodatkowo wyœwietla nazwê u¿ytkownika w kontrolce
 		if (username != nullptr && Session::Username=="admin") {
 			usernameLabel = gcnew Label();
 			usernameLabel->Text = "U¿ytkownik: " + username;
@@ -62,14 +68,19 @@ namespace TicketManagerSystem {
 		this->Controls->Add(cancelBtn);
 	}
 
+	// klikniêcie przycisku anulowania rezerwacji
 	Void ReservationItem::cancelBtn_Click(Object^ sender, EventArgs^ e) {
+		// pobranie nazwy u¿ytkownika z rezerwacji
 		String^ username = this->username;
 
+		// konwersja nazwy u¿ytkownika
 		std::string uname = msclr::interop::marshal_as<std::string>(username);
 
+		// anulowanie biletu u¿ytkownika podaj¹c id biletu i nazwê u¿ytkownika
 		if (cancelUserTicket(uname, ticketId)) {
 			MainForm::Instance->loadControl(gcnew Reservations());
 
+			// sprawdzenie czy u¿ytkownik to admin, jeœli tak to wyœwietlenie komunikatu o anulowaniu biletu
 			if (Session::Username == "admin") {
 				MessageBox::Show("Anulowano bilet u¿ytkownikowi.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}

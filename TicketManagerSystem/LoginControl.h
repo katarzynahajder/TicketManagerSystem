@@ -7,6 +7,10 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Formularz do logowania.
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class LoginControl : public System::Windows::Forms::UserControl

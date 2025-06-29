@@ -7,27 +7,21 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Formularz do edytowania danych u¿ytkownika.
+// ==============================================
 
 namespace TicketManagerSystem {
 
-	/// <summary>
-	/// Summary for EditProfileControl
-	/// </summary>
 	public ref class EditProfileControl : public System::Windows::Forms::UserControl
 	{
 	public:
 		EditProfileControl(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~EditProfileControl()
 		{
 			if (components)
@@ -36,31 +30,20 @@ namespace TicketManagerSystem {
 			}
 		}
 	private: System::Windows::Forms::Label^ titleLabel;
-	protected:
 	private: System::Windows::Forms::TextBox^ passwordConfirmBox;
 	private: System::Windows::Forms::Label^ passwordConfirmLabel;
 	private: System::Windows::Forms::TextBox^ passwordBox;
 	private: System::Windows::Forms::Button^ editBtn;
-
 	private: System::Windows::Forms::TextBox^ emailBox;
 	private: System::Windows::Forms::Label^ passwordLabel;
 	private: System::Windows::Forms::TextBox^ usernameBox;
 	private: System::Windows::Forms::Label^ usernameLabel;
 	private: System::Windows::Forms::Label^ emailLabel;
 	private: System::Windows::Forms::Button^ cancelBtn;
-
-
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+	private: System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
+
 		void InitializeComponent(void)
 		{
 			this->titleLabel = (gcnew System::Windows::Forms::Label());
@@ -236,5 +219,5 @@ namespace TicketManagerSystem {
 	private: System::Void cancelBtn_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void EditProfileControl_Load(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void editBtn_Click(System::Object^ sender, System::EventArgs^ e);
-};
+	};
 }

@@ -3,12 +3,22 @@
 #include <vector>
 #include <string>
 
+// ==============================================
+// Implementacja operacji na bazie danych SQLite:
+// - Tworzenie tabel
+// - Wstawianie rekordów (użytkownicy, wydarzenia, rezerwacje)
+// - Pobieranie danych dla UI
+// ==============================================
+
+// rejestracja użytkownika
 bool registerUser(const std::string& username, const std::string& email, const std::string& password) {
+	// otwarcie bazy danych
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
         return false;
     }
 
+	// tworzenie tabeli użytkowników, jeśli nie istnieje
     const char* createTableSQL =
         "CREATE TABLE IF NOT EXISTS users ("
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -23,6 +33,7 @@ bool registerUser(const std::string& username, const std::string& email, const s
         return false;
     }
 
+	// przygotowanie zapytania SQL do wstawienia użytkownika
     const char* insertSQL =
         "INSERT INTO users (username, email, password) VALUES (?, ?, ?);";
 
@@ -32,17 +43,21 @@ bool registerUser(const std::string& username, const std::string& email, const s
         return false;
     }
 
+	// bindowanie parametrów zapytania
     sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 2, email.c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 3, password.c_str(), -1, SQLITE_STATIC);
 
+	// wykonanie zapytania
     bool success = sqlite3_step(stmt) == SQLITE_DONE;
 
+	// zwolnienie zasobów
     sqlite3_finalize(stmt);
     sqlite3_close(db);
     return success;
 }
 
+// sprawdzenie, czy użytkownik istnieje
 bool userExists(const std::string& username) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK)
@@ -66,6 +81,7 @@ bool userExists(const std::string& username) {
     return exists;
 }
 
+// logowanie użytkownika
 bool loginUser(const std::string& username, const std::string& password) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK)
@@ -93,6 +109,7 @@ bool loginUser(const std::string& username, const std::string& password) {
     return authenticated;
 }
 
+// tworzenie wydarzenia
 bool createEvent(const std::string& title, const std::string& desc, const std::string& date, int count, const std::string& category) {
     sqlite3* db;
     sqlite3_open("tms.db", &db);
@@ -134,15 +151,18 @@ bool createEvent(const std::string& title, const std::string& desc, const std::s
     return success;
 }
 
+// ładowanie wydarzeń
 std::vector<Event> loadEvents() {
     std::vector<Event> events;
     sqlite3* db;
     sqlite3_open("tms.db", &db);
 
+	// pobranie wszystkich wydarzeń z bazy danych
     const char* sql = "SELECT id, title, description, date, count, category FROM events";
     sqlite3_stmt* stmt;
     sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 
+	// iteracja po wynikach zapytania
     while (sqlite3_step(stmt) == SQLITE_ROW) {
         Event e;
         e.id = sqlite3_column_int(stmt, 0);
@@ -159,6 +179,7 @@ std::vector<Event> loadEvents() {
     return events;
 }
 
+// tworzenie rezerwacji
 bool createReservation(const std::string& username, int ticketId) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK)
@@ -195,10 +216,12 @@ bool createReservation(const std::string& username, int ticketId) {
     return success;
 }
 
+// zmniejszenie liczby biletów dla wydarzenia
 bool decrementTicketCount(int ticketId) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK) return false;
 
+	// aktualizacja liczby biletów w tabeli wydarzeń
     const char* sql = "UPDATE events SET count = count - 1 WHERE id = ? AND count > 0;";
     sqlite3_stmt* stmt;
 
@@ -215,6 +238,7 @@ bool decrementTicketCount(int ticketId) {
     return success;
 }
 
+// sprawdzenie, czy użytkownik zarezerwował bilet na dane wydarzenie
 bool hasUserReserved(const std::string& username, int ticketId) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK) return false;
@@ -240,6 +264,7 @@ bool hasUserReserved(const std::string& username, int ticketId) {
     return reserved;
 }
 
+// ładowanie rezerwacji użytkownika lub wszystkich rezerwacji dla administratora
 std::vector<Reservation> loadReservations(const std::string& username) {
     std::vector<Reservation> result;
     sqlite3* db;
@@ -289,6 +314,7 @@ std::vector<Reservation> loadReservations(const std::string& username) {
     return result;
 }
 
+// pobranie liczby biletów użytkownika
 int getUserTicketCount(const std::string& username) {
     int ticketCount = -1;
     sqlite3* db;
@@ -313,6 +339,7 @@ int getUserTicketCount(const std::string& username) {
     return ticketCount;
 }
 
+// pobranie informacji o użytkowniku
 std::vector<UserInfo> getUserInfo(const std::string& username) {
     std::vector<UserInfo> result;
     sqlite3* db;
@@ -341,6 +368,7 @@ std::vector<UserInfo> getUserInfo(const std::string& username) {
     return result;
 }
 
+// aktualizacja informacji o użytkowniku
 bool updateUserInfo(const std::string& oldUsername, const std::string& newUsername, const std::string& email, const std::string& password) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
@@ -367,12 +395,14 @@ bool updateUserInfo(const std::string& oldUsername, const std::string& newUserna
     return success;
 }
 
+// anulowanie rezerwacji użytkownika
 bool cancelUserTicket(const std::string& username, int ticketId) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
         return false;
     }
 
+	// usunięcie rezerwacji użytkownika
     const char* sqlRemoveTicket = "DELETE FROM reservations WHERE username = ? AND ticket_id = ?";
 
     sqlite3_stmt* stmt;
@@ -388,6 +418,7 @@ bool cancelUserTicket(const std::string& username, int ticketId) {
     }
     sqlite3_finalize(stmt);
 
+	// zwiększenie liczby biletów dla wydarzenia
     const char* sqlEventIncreaseCount = "UPDATE events SET count = count + 1 WHERE id = ?";
 
     if (sqlite3_prepare_v2(db, sqlEventIncreaseCount, -1, &stmt, nullptr) == SQLITE_OK) {
@@ -405,7 +436,7 @@ bool cancelUserTicket(const std::string& username, int ticketId) {
     return true;
 }
 
-
+// aktualizacja wydarzenia
 bool updateEvent(int eventId, const std::string& newTitle, const std::string& newDesc, const std::string& newDate, int newCount, const std::string& newCategory) {
     sqlite3* db;
     if (sqlite3_open("tms.db", &db) != SQLITE_OK) {
@@ -434,6 +465,7 @@ bool updateEvent(int eventId, const std::string& newTitle, const std::string& ne
     return success;
 }
 
+// usunięcie wydarzenia i wszystkich jego rezerwacji
 bool removeEvent(int eventId) {
 
     sqlite3* db;
@@ -471,6 +503,7 @@ bool removeEvent(int eventId) {
     return true;
 }
 
+// pobranie informacji o wydarzeniu na podstawie ID
 std::vector<Event> getEventInfo(int eventId) {
     std::vector<Event> result;
     sqlite3* db;

@@ -7,6 +7,10 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Panel widoczny po odpaleniu aplikacji.
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class MainMenuControl : public System::Windows::Forms::UserControl

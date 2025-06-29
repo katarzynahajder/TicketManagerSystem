@@ -13,8 +13,14 @@ using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
+// ==============================================
+// Implementacja klasy EventItem.
+// Klasa ta reprezentuje pojedynczy element wydarzenia.
+// ==============================================
+
 namespace TicketManagerSystem {
 
+	// konstruktor klasy EventItem
 	EventItem::EventItem(int id, String^ title, String^ description, DateTime date, int count, String^ category) {
 		this->ticketId = id;
 		this->Size = Drawing::Size(1115, 175);
@@ -76,10 +82,9 @@ namespace TicketManagerSystem {
 		removeEventBtn->Enabled = false;
 		removeEventBtn->Visible = false;
 		
-
+		// sprawdza, czy użytkownik jest administratorem i czy ma już rezerwację na ten bilet
 		msclr::interop::marshal_context context;
 		std::string nativeUsername = context.marshal_as<std::string>(Session::Username);
-
 		if (nativeUsername == "admin") {
 			reserveBtn->Enabled = false;
 			reserveBtn->Visible = false;
@@ -113,10 +118,17 @@ namespace TicketManagerSystem {
 		this->Controls->Add(editEventBtn);
 		this->Controls->Add(removeEventBtn);
 	}
+
+	// obsługuje kliknięcie przycisku "Rezerwuj"
+	// - zapisuje rezerwację do bazy
+	// - odświeża widok
+	// - dezaktywuje przycisk po rezerwacji
 	void EventItem::reserveBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 		msclr::interop::marshal_context context;
 		std::string nativeUsername = context.marshal_as<std::string>(Session::Username); 
 		
+		// sprawdza, czy użytkownik już zarezerwował dany bilet
+		// jeśli tak – przycisk rezerwacji jest nieaktywny
 		if (hasUserReserved(nativeUsername, this->ticketId)) {
 			MessageBox::Show("Już zarezerwowałeś ten bilet.", "Informacja", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			return;
@@ -127,16 +139,20 @@ namespace TicketManagerSystem {
 
 		MainForm::Instance->loadControl(gcnew EventList());
 
+		// jeśli rezerwacja się powiodła, wyświetla komunikat i usuwa przycisk rezerwacji
 		if (success) {
 			String^ msg = "Zarezerwowano bilet na: " + titleLabel->Text;
 			MessageBox::Show(msg, "Rezerwacja", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			this->Controls->Remove(reserveBtn);
 		}
 	}
+
+	// obsługuje kliknięcie przycisku "Edytuj wydarzenie"
 	void EventItem::editEventBtn_Click(Object^ sender, EventArgs^ e) {
 		MainForm::Instance->loadControl(gcnew EditEventControl(this->ticketId));
 	}
 
+	// obsługuje kliknięcie przycisku "Usuń wydarzenie"
 	void EventItem::removeEventBtn_Click(Object^ sender, EventArgs^ e) {
 
 		if (removeEvent(this->ticketId)) {

@@ -9,6 +9,10 @@ using namespace System::Data;
 using namespace System::Drawing;
 using namespace System::Data::SqlClient;
 
+// ==============================================
+// G³ówne okno systemu zarz¹dzania biletami.
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class MainForm : public System::Windows::Forms::Form

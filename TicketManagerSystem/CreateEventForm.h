@@ -7,6 +7,10 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Formularz do dodawania nowego wydarzenia.
+// Dostêpny tylko dla u¿ytkownika "admin".
+// ==============================================
 
 namespace TicketManagerSystem {
 

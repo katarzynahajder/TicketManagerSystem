@@ -7,6 +7,10 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Formularz do edytowania wydarzenia.
+// Dostêpny tylko dla u¿ytkownika "admin".
+// ==============================================
 
 namespace TicketManagerSystem {
 
@@ -32,21 +36,14 @@ namespace TicketManagerSystem {
 	private: System::Windows::Forms::Button^ cancelBtn;
 	private: System::Windows::Forms::DateTimePicker^ dateTimeBox;
 	private: System::Windows::Forms::ComboBox^ categoryBox;
-
-
-
-
 	private: System::Windows::Forms::Label^ categorylabel;
 	private: System::Windows::Forms::NumericUpDown^ ticketCountBox;
-
 	private: System::Windows::Forms::Label^ numLabel;
 	private: System::Windows::Forms::TextBox^ descriptionBox;
 	private: System::Windows::Forms::Label^ titleLabel;
 	private: System::Windows::Forms::Button^ addBtn;
 	private: System::Windows::Forms::Label^ dateLabel;
 	private: System::Windows::Forms::TextBox^ titleBox;
-
-
 	private: System::Windows::Forms::Label^ nameLabel;
 	private: System::Windows::Forms::Label^ emailLabel;
 	private:System::ComponentModel::Container ^components;
@@ -251,5 +248,5 @@ namespace TicketManagerSystem {
 	private: System::Void EditEventControl_Load(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void cancelBtn_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void addBtn_Click(System::Object^ sender, System::EventArgs^ e);
-};
+	};
 }

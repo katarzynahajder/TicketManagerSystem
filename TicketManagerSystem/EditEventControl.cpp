@@ -9,11 +9,17 @@
 #include "../NativeDatabase/Database.h"
 #pragma managed
 
+// ==============================================
+// Implementacja klasy EditEventControl.
+// Ta klasa s³u¿y do edycji danych wydarzeñ.
+// ==============================================
+
 using namespace TicketManagerSystem;
 
 Void EditEventControl::EditEventControl_Load(System::Object^ sender, System::EventArgs^ e) {
     std::vector<Event> info = getEventInfo(this->eventId);
 
+	// sprawdzenie, czy informacje o wydarzeniu zosta³y poprawnie wczytane
     if (!info.empty()) {
         Event event = info[0];
 
@@ -32,10 +38,13 @@ Void EditEventControl::EditEventControl_Load(System::Object^ sender, System::Eve
     }
 }
 
+// akcja przycisku "Anuluj"
 Void EditEventControl::cancelBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+	// przejœcie do listy wydarzeñ po anulowaniu edycji
     MainForm::Instance->loadControl(gcnew EventList());
 }
 
+// akcja przycisku - aktualizacja danych wydarzenia
 Void EditEventControl::addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
     String^ newTitle = titleBox->Text;
     String^ newDateTime = dateTimeBox->Text;
@@ -44,11 +53,13 @@ Void EditEventControl::addBtn_Click(System::Object^ sender, System::EventArgs^ e
     int newTicketCount = (int)ticketCountBox->Value;
     int eventId = this->eventId;
     
+	// konwersja danych z kontrolki
     std::string newT = msclr::interop::marshal_as<std::string>(newTitle);
     std::string newDT= msclr::interop::marshal_as<std::string>(newDateTime);
     std::string newDesc = msclr::interop::marshal_as<std::string>(newDescription);
     std::string newCat = msclr::interop::marshal_as<std::string>(newCategory);
 
+	// aktualizacja danych wydarzenia w bazie danych
     if (updateEvent(eventId, newT, newDesc, newDT, newTicketCount, newCat)) {
         MessageBox::Show("Dane wydarzenia zosta³y zaktualizowane.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
         MainForm::Instance->loadControl(gcnew EventList());

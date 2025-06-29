@@ -3,6 +3,12 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
+// ==============================================
+// Reprezentacja graficzna pojedynczej rezerwacji.
+// Zawiera dane: tytu³, opis, data, kategoria, nazwa u¿ytkownika.
+// Umo¿liwia anulowanie rezerwacji.
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class ReservationItem : public UserControl {

@@ -7,6 +7,10 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+// ==============================================
+// Formularz do rejestracji.
+// ==============================================
+
 namespace TicketManagerSystem {
 
 	public ref class RegisterControl : public System::Windows::Forms::UserControl
